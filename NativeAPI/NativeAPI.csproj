@@ -22,8 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Native.API\Native.API.csproj" />
-    <ProjectReference Include="..\Native.Domain\Native.Domain.csproj" />
-    <ProjectReference Include="..\Native.Services\Native.Services.csproj" />
   </ItemGroup>
 
 </Project>

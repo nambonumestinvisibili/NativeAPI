@@ -1,3 +1,4 @@
+using Native.API;
 using Native.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.ConfigureDbContext(builder.Configuration.GetConnectionString("NativeDbConntection"));
 builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureControllers();
 
 var app = builder.Build();
 
