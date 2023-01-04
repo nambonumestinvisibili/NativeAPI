@@ -21,8 +21,12 @@ namespace Native.API.Controllers
             _repositoryManager = repositoryManager;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<Venue>> GetAll() =>
-            await _repositoryManager.Venue.GetAll();
+        //[HttpGet]
+        //public async Task<IEnumerable<Venue>> GetAll() =>
+        //    await _repositoryManager.Venue.GetAll();
+
+        [HttpGet()]
+        public async Task<Venue> GetVenue() => 
+            await _repositoryManager.Venue.GetByGuid(Guid.NewGuid());
     }
 }

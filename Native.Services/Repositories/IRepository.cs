@@ -11,6 +11,8 @@ namespace Native.Services.Repositories
 {
     public interface IRepository<T> where T : Entity
     {
+        Task<T> GetByGuid(Guid guid);
+        Task<T> GetById(int id);
         IQueryable<T> FindAll(bool trackChanges);
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
         void Create(T entity);

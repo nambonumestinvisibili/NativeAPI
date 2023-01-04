@@ -10,8 +10,4 @@
     <ProjectReference Include="..\Native.Domain\Native.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-
 </Project>

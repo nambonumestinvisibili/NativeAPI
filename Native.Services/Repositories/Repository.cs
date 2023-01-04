@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Native.Domain.Models;
 using Native.Services.DataAccess;
+using Native.Services.Infrastructure.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,20 @@ namespace Native.Services.Repositories
                     .AsNoTracking() :
                 NativeContext.Set<T>()
                     .Where(expression);
+
+        public async Task<T> GetByGuid(Guid guid)
+        {
+            T result = await NativeContext.Set<T>().FirstOrDefaultAsync(item => item.Guid == guid);
+            ExceptionExtensions.ThrowNotFoundIfNull<T>(result, guid);
+            return result;
+        }
+
+        public async Task<T> GetById(int id)
+        {
+            T result = await NativeContext.Set<T>().FirstOrDefaultAsync(item => item.Id == id);
+            ExceptionExtensions.ThrowNotFoundIfNull<T>(result, id);
+            return result;
+        }
 
         public void Create(T entity) => NativeContext.Set<T>().Add(entity);
         public void Update(T entity) => NativeContext.Set<T>().Update(entity);
