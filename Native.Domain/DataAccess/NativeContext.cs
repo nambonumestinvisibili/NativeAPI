@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Native.Services.DataAccess
+namespace Native.Domain.DataAccess
 {
     public class NativeContext : DbContext
     {

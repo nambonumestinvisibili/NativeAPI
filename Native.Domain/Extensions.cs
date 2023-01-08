@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Native.Services.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Native.Domain.Models;
+using Native.Domain.DataAccess;
 
-namespace Native.Services
+namespace Native.Domain
 {
     public static class Extensions
     {
@@ -16,6 +16,6 @@ namespace Native.Services
                     b => b.MigrationsAssembly(GetAssemblyName())));
         }
 
-        private static string GetAssemblyName() => typeof(Venue).Assembly.GetName().Name;
+        private static string GetAssemblyName() => typeof(Venue).Assembly.GetName().Name!;
     }
 }

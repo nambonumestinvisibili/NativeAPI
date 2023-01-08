@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Native.Domain.Models;
-using Native.Services;
+using Native.Service.Services.Interfaces;
+using Native.Services.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,23 +12,31 @@ using System.Threading.Tasks;
 
 namespace Native.API.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class VenueController : ControllerBase
+    public class VenueController : NativeApiController
     {
-        private readonly IRepositoryManager _repositoryManager;
+        private readonly IVenueService _venueService;
 
-        public VenueController(IRepositoryManager repositoryManager)
+        public VenueController(
+            IMapper mapper,
+            IVenueService venueService
+        ) : base(mapper)
         {
-            _repositoryManager = repositoryManager;
+            _venueService = venueService;
         }
 
-        //[HttpGet]
-        //public async Task<IEnumerable<Venue>> GetAll() =>
-        //    await _repositoryManager.Venue.GetAll();
+        [HttpGet]
+        public async Task<IEnumerable<Venue>> GetAll() =>
+            await _venueService.GetAllAsync();
 
-        [HttpGet()]
-        public async Task<Venue> GetVenue() => 
-            await _repositoryManager.Venue.GetByGuid(Guid.NewGuid());
+        [HttpGet("{guid}")]
+        public async Task<Venue> GetVenue(Guid guid) =>
+            await _venueService.GetByGuid(guid);
+
+        [HttpPost]
+        public async Task CreateVenue(CreateVenueRequest request)
+        {
+            var venue = _mapper.Map<Venue>(request);
+            await _venueService.CreateNewVenue(venue, request.InterestGuids);
+        }
     }
 }

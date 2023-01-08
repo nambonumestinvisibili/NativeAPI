@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Native.Domain.Models;
-using Native.Services.DataAccess;
-using Native.Services.Infrastructure.Exceptions;
+using Native.Domain.DataAccess;
+using Native.Repositories.Infrastructure.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Native.Services.Repositories
+namespace Native.Repositories.Repositories
 {
     internal class Repository<T> where T : Entity
     {
@@ -36,16 +36,16 @@ namespace Native.Services.Repositories
 
         public async Task<T> GetByGuid(Guid guid)
         {
-            T result = await NativeContext.Set<T>().FirstOrDefaultAsync(item => item.Guid == guid);
+            T? result = await NativeContext.Set<T>().SingleOrDefaultAsync(item => item.Guid == guid);
             ExceptionExtensions.ThrowNotFoundIfNull<T>(result, guid);
-            return result;
+            return result!;
         }
 
         public async Task<T> GetById(int id)
         {
-            T result = await NativeContext.Set<T>().FirstOrDefaultAsync(item => item.Id == id);
+            T? result = await NativeContext.Set<T>().SingleOrDefaultAsync(item => item.Id == id);
             ExceptionExtensions.ThrowNotFoundIfNull<T>(result, id);
-            return result;
+            return result!;
         }
 
         public void Create(T entity) => NativeContext.Set<T>().Add(entity);

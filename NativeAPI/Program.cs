@@ -1,6 +1,9 @@
 using Native.API;
 using Native.API.Exceptions;
 using Native.Services;
+using Native.Domain;
+using Native.Repositories;
+using Native.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +14,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.ConfigureDbContext(builder.Configuration.GetConnectionString("NativeDbConntection"));
+builder.Services.ConfigureDbContext(builder.Configuration.GetConnectionString("NativeDbConntection")!);
 builder.Services.ConfigureRepositoryManager();
+builder.Services.ConfigureNativeServices();
 builder.Services.ConfigureControllers();
+
+builder.Services.AddAutoMapper(
+    typeof(Native.Domain.Extensions),
+    typeof(Native.Repositories.Extensions),
+    typeof(Native.Service.Extensions),
+    typeof(Native.API.Extensions));
 
 var app = builder.Build();
 

@@ -1,5 +1,5 @@
 ﻿using Native.Domain.Models;
-using Native.Services.DataAccess;
+using Native.Domain.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Native.Services.Repositories
+namespace Native.Service.Repositories
 {
     public interface IRepository<T> where T : Entity
     {

@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NativeAPI", "NativeAPI\Nati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Native.Domain", "Native.Domain\Native.Domain.csproj", "{53CBB58C-DF19-41D9-ACCD-FB4AA99D0544}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Native.Services", "Native.Services\Native.Services.csproj", "{920317C3-DD61-405A-A5F2-0BD61E6C8470}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Native.Repositories", "Native.Services\Native.Repositories.csproj", "{920317C3-DD61-405A-A5F2-0BD61E6C8470}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Native.API", "Native.API\Native.API.csproj", "{B33676BF-F1C1-4BDA-9185-A1E458B73C18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Native.LoggerService", "Native.LoggerService\Native.LoggerService.csproj", "{3C1C870B-FFD1-4982-94BD-C820D6EAE824}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Native.LoggerService", "Native.LoggerService\Native.LoggerService.csproj", "{3C1C870B-FFD1-4982-94BD-C820D6EAE824}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Native.Service", "Native.Service\Native.Service.csproj", "{0DA5AF51-14C5-4627-BE0A-8A24AB0D2A35}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{3C1C870B-FFD1-4982-94BD-C820D6EAE824}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C1C870B-FFD1-4982-94BD-C820D6EAE824}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C1C870B-FFD1-4982-94BD-C820D6EAE824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DA5AF51-14C5-4627-BE0A-8A24AB0D2A35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DA5AF51-14C5-4627-BE0A-8A24AB0D2A35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DA5AF51-14C5-4627-BE0A-8A24AB0D2A35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DA5AF51-14C5-4627-BE0A-8A24AB0D2A35}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
