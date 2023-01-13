@@ -9,6 +9,7 @@ namespace Native.Service
         public static void ConfigureNativeServices(this IServiceCollection services)
         {
             services.AddScoped<IVenueService, VenueService>();
+            services.AddScoped<IInterestService, InterestService>();
         }
 
     }

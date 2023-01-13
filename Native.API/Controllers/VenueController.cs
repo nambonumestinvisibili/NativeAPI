@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Native.Domain.Models;
+using Native.Service.DTOs;
 using Native.Service.Services.Interfaces;
 using Native.Services.Requests;
 using System;
@@ -25,18 +28,19 @@ namespace Native.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Venue>> GetAll() =>
-            await _venueService.GetAllAsync();
+        public async Task<IEnumerable<VenueDTO>> GetAll() =>
+            await _venueService.GetAllAsync<VenueDTO>();
 
         [HttpGet("{guid}")]
-        public async Task<Venue> GetVenue(Guid guid) =>
-            await _venueService.GetByGuid(guid);
+        public async Task<VenueDTO> GetVenue(Guid guid) =>
+            await _venueService.GetByGuid<VenueDTO>(guid);
 
         [HttpPost]
-        public async Task CreateVenue(CreateVenueRequest request)
+        public async Task<IActionResult> CreateVenue(CreateVenueRequest request)
         {
             var venue = _mapper.Map<Venue>(request);
             await _venueService.CreateNewVenue(venue, request.InterestGuids);
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }

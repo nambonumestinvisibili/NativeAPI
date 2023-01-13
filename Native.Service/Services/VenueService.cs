@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Native.Repositories;
+using AutoMapper;
 
 namespace Native.Service.Services
 {
     internal class VenueService : ResourceService<Venue>, IVenueService
     {
-        public VenueService(IRepositoryManager repositoryManager) : base(repositoryManager)
+        public VenueService(
+            IMapper mapper, 
+            IRepositoryManager repositoryManager
+            ) : base(repositoryManager, mapper)
         {
         }
 
