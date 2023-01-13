@@ -22,7 +22,7 @@ namespace Native.Repositories.Infrastructure.Exceptions
         }
 
         public NotFoundException(string resourceTypeName, IEnumerable<Guid> guids)
-            : base(string.Format(MultipleResourcesErrorMessage, resourceTypeName, guids))
+            : base(string.Format(MultipleResourcesErrorMessage, resourceTypeName, string.Join(", ", guids)))
         {
         }
     }

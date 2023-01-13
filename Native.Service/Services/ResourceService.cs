@@ -12,7 +12,7 @@ namespace Native.Service.Services
 {
     internal class ResourceService<T> : IResourceService<T> where T : Entity
     {
-        private readonly IRepositoryManager _repositoryManager;
+        protected readonly IRepositoryManager _repositoryManager;
 
         public ResourceService(IRepositoryManager repositoryManager) 
         {
