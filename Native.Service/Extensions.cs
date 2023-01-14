@@ -10,6 +10,9 @@ namespace Native.Service
         {
             services.AddScoped<IVenueService, VenueService>();
             services.AddScoped<IInterestService, InterestService>();
+            services.AddScoped<IProfileService, ProfileService>();
+            services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IResidenceService, ResidenceService>();
         }
 
     }

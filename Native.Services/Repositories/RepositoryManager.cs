@@ -15,6 +15,9 @@ namespace Native.Repositories.Repositories
     {
         private IVenueRepository? _venueRepository;
         private IInterestRepository? _interestRepository;
+        private IResidenceRepository? _residenceRepository;
+        private IProfileRepository? _profileRepository;
+        private IEventRepository? _eventRepository;
         private readonly NativeContext _nativeContext;
 
         public RepositoryManager(NativeContext nativeContext)
@@ -23,8 +26,10 @@ namespace Native.Repositories.Repositories
         }
 
         public IVenueRepository Venue => _venueRepository ??= new VenueRepository(_nativeContext);
-
         public IInterestRepository Interest => _interestRepository ??= new InterestRepository(_nativeContext);
+        public IEventRepository Event => _eventRepository ??= new EventRepository(_nativeContext);
+        public IResidenceRepository Residence => _residenceRepository ??= new ResidenceRepository(_nativeContext);
+        public IProfileRepository Profile => _profileRepository ??= new ProfileRepository(_nativeContext);
 
         public async Task Save() => await _nativeContext.SaveChangesAsync();
 
