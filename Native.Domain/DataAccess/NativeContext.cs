@@ -26,6 +26,7 @@ namespace Native.Domain.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             SeedInterests(modelBuilder);
+            ConfigureProfileEventManyToManyRelationship(modelBuilder);
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder builder)
@@ -51,11 +52,26 @@ namespace Native.Domain.DataAccess
             modelBuilder.Entity<Interest>().HasData(interests);
         }
 
+        private static void ConfigureProfileEventManyToManyRelationship(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProfileEvent>()
+                .HasKey(profileEvent => new { profileEvent.ProfileId, profileEvent.EventId });
+            modelBuilder.Entity<ProfileEvent>()
+                .HasOne(pe => pe.Profile)
+                .WithMany(p => p.ProfileEvents)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ProfileEvent>()
+                .HasOne(pe => pe.Event)
+                .WithMany(e => e.ProfileEvents)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
+
         public DbSet<Venue> Venues { get; set; }
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Residence> Residences { get; set; }
+        public DbSet<ProfileEvent> ProfileEvents { get; set; }
 
     }
 

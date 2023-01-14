@@ -12,6 +12,7 @@ namespace Native.Domain.Models
         public string Introduction { get; set; }
         public ICollection<Residence> Residences { get; set; }
         public ICollection<Interest> Interests { get; set; }
+        public ICollection<ProfileEvent> ProfileEvents { get; set; }
 
     }
 }

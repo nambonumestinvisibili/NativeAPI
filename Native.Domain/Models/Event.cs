@@ -16,6 +16,6 @@ namespace Native.Domain.Models
         public Profile Organiser { get; set; }
         public Residence Residence { get; set; }
         public ICollection<Interest> Interests { get; set; }
-
+        public ICollection<ProfileEvent> ProfileEvents { get; set; }
     }
 }
