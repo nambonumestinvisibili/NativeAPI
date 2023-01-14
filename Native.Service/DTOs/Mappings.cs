@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Native.Service.DTOs
 {
-    public class Mappings : Profile
+    public class Mappings : AutoMapper.Profile
     {
         public Mappings() 
         {

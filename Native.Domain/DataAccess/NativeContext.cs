@@ -53,6 +53,9 @@ namespace Native.Domain.DataAccess
 
         public DbSet<Venue> Venues { get; set; }
         public DbSet<Interest> Interests { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Residence> Residences { get; set; }
 
     }
 

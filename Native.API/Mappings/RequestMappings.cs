@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Native.API.Mappings
 {
-    public class RequestMappings : Profile
+    public class RequestMappings : AutoMapper.Profile
     {
         public RequestMappings() 
         {
