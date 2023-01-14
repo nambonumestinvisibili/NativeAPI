@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Native.Service.DTOs;
+using Native.Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +12,14 @@ namespace Native.API.Controllers
 {
     public class ProfileController : NativeApiController
     {
-        public ProfileController(IMapper mapper) : base(mapper)
+        private readonly IProfileService _profileService;
+        public ProfileController(IMapper mapper, IProfileService profileService) : base(mapper)
         {
+            _profileService = profileService;
         }
+
+        [HttpGet("{guid}")]
+        public async Task<IActionResult> GetProfile(Guid guid) =>
+            Ok(await _profileService.GetByGuid<ProfileDTO>(guid));
     }
 }
