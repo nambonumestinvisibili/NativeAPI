@@ -40,7 +40,7 @@ namespace Native.API.Controllers
         {
             var venue = _mapper.Map<Venue>(request);
             await _venueService.CreateNewVenue(venue, request.InterestGuids);
-            return StatusCode(StatusCodes.Status200OK);
+            return StatusCode(StatusCodes.Status201Created);
         }
     }
 }

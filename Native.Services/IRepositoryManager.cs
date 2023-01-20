@@ -15,6 +15,9 @@ namespace Native.Repositories
         IRepository<T> GetRepoByResourceType<T>() where T : Entity;
         IVenueRepository Venue { get; }
         IInterestRepository Interest { get; }
+        IEventRepository Event { get; }
+        IProfileRepository Profile { get; }
+        ILocationRepository Location { get; }
         Task Save();
     }
 }

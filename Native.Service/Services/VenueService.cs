@@ -22,7 +22,7 @@ namespace Native.Service.Services
 
         public async Task CreateNewVenue(Venue venue, IEnumerable<Guid> interestGuids)
         {
-            var interests = await _repositoryManager.Interest.FindAllOfGuids(interestGuids);
+            var interests = await _repositoryManager.Interest.GetAllOfGuids(interestGuids.ToList());
             venue.Interests = interests.ToList();
             _repositoryManager.Venue.Create(venue);
             await _repositoryManager.Save();

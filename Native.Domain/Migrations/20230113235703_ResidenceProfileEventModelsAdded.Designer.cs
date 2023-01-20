@@ -307,7 +307,7 @@ namespace Native.Domain.Migrations
                     b.ToTable("Profiles");
                 });
 
-            modelBuilder.Entity("Native.Domain.Models.Residence", b =>
+            modelBuilder.Entity("Native.Domain.Models.Location", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -385,7 +385,7 @@ namespace Native.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Native.Domain.Models.Residence", "Residence")
+                    b.HasOne("Native.Domain.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("ResidenceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -393,7 +393,7 @@ namespace Native.Domain.Migrations
 
                     b.Navigation("Organiser");
 
-                    b.Navigation("Residence");
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("Native.Domain.Models.Interest", b =>
@@ -407,7 +407,7 @@ namespace Native.Domain.Migrations
                         .HasForeignKey("ProfileId");
                 });
 
-            modelBuilder.Entity("Native.Domain.Models.Residence", b =>
+            modelBuilder.Entity("Native.Domain.Models.Location", b =>
                 {
                     b.HasOne("Native.Domain.Models.Profile", null)
                         .WithMany("Residences")

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Native.Service.Services.Interfaces
 {
-    public interface IResidenceService : IResourceService<Residence>
+    public interface IResidenceService : IResourceService<Location>
     {
     }
 }

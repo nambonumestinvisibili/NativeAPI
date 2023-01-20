@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Native.Service.Services
 {
-    internal class ResidenceService : ResourceService<Residence>, IResidenceService
+    internal class ResidenceService : ResourceService<Location>, IResidenceService
     {
         public ResidenceService(IRepositoryManager repositoryManager, IMapper mapper) : base(repositoryManager, mapper)
         {

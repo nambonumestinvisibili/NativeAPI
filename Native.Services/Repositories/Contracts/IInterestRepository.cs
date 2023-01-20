@@ -10,6 +10,5 @@ namespace Native.Repositories.Repositories.Contracts
 {
     public interface IInterestRepository : IRepository<Interest>
     {
-        Task<IEnumerable<Interest>> FindAllOfGuids(IEnumerable<Guid> guids);
     }
 }

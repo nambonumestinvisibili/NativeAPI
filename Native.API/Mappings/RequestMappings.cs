@@ -20,6 +20,12 @@ namespace Native.API.Mappings
                 .ForSourceMember(s => s.InterestGuids, opt => opt.DoNotValidate())
                 .ReverseMap();
 
+            CreateMap<CreateEventRequest, Event>()
+                .ForMember(s => s.OpeningTime, opt => opt.ConvertUsing(new TimeOfTheDayConverter()))
+                .ForMember(s => s.ClosingTime, opt => opt.ConvertUsing(new TimeOfTheDayConverter()))
+                .ForSourceMember(s => s.InterestGuids, opt => opt.DoNotValidate())
+                .ReverseMap();
+
             //CreateMap<Source, Target>
         }
     }

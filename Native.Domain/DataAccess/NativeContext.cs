@@ -62,7 +62,7 @@ namespace Native.Domain.DataAccess
                 .OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<ProfileEvent>()
                 .HasOne(pe => pe.Event)
-                .WithMany(e => e.ProfileEvents)
+                .WithMany(e => e.InvitedGuests)
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
@@ -70,7 +70,7 @@ namespace Native.Domain.DataAccess
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Profile> Profiles { get; set; }
-        public DbSet<Residence> Residences { get; set; }
+        public DbSet<Location> Residences { get; set; }
         public DbSet<ProfileEvent> ProfileEvents { get; set; }
 
     }

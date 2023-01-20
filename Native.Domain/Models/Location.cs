@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Native.Domain.Models
 {
-    public class Residence : Entity
+    public class Location : Entity
     {
         public string Name { get; set; }
     }

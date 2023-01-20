@@ -40,11 +40,11 @@ namespace Native.Service.Services
 
         public async Task<U> GetByGuid<U>(Guid guid) where U : IDTOConvertible<T> => 
             _mapper.Map<U>(await _repositoryManager.GetRepoByResourceType<T>()
-            .GetByGuid(guid));
+            .GetByGuidAsync(guid));
 
         public async Task<T> GetById(int id) => 
             await _repositoryManager.GetRepoByResourceType<T>()
-            .GetById(id);
+            .GetByIdAsync(id);
 
         public async Task<IEnumerable<U>> GetAllAsync<U>() where U : IDTOConvertible<T> =>
             _mapper.Map<IEnumerable<U>>(await GetAllRawAsync());

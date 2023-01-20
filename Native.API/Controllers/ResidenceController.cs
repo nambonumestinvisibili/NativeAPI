@@ -20,6 +20,6 @@ namespace Native.API.Controllers
 
         [HttpGet("{guid}")]
         public async Task<IActionResult> GetResidence(Guid guid) =>
-            Ok(await _residenceService.GetByGuid<ResidenceDTO>(guid));
+            Ok(await _residenceService.GetByGuid<LocationDTO>(guid));
     }
 }

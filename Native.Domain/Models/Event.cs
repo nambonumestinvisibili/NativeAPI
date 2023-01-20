@@ -14,8 +14,8 @@ namespace Native.Domain.Models
         public TimeOnly ClosingTime { get; set; }
         public decimal Charge { get; set; }
         public Profile Organiser { get; set; }
-        public Residence Residence { get; set; }
+        public Location Residence { get; set; }
         public ICollection<Interest> Interests { get; set; }
-        public ICollection<ProfileEvent> ProfileEvents { get; set; }
+        public ICollection<ProfileEvent> InvitedGuests { get; set; }
     }
 }

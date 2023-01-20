@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Native.Service.DTOs
 {
-    public class ResidenceDTO : IDTOConvertible<Residence>
+    public record LocationDTO : IDTOConvertible<Location>
     {
     }
 }

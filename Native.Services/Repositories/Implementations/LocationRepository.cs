@@ -4,9 +4,9 @@ using Native.Repositories.Repositories.Contracts;
 
 namespace Native.Repositories.Repositories.Implementations
 {
-    internal class ResidenceRepository : Repository<Residence>, IResidenceRepository
+    internal class LocationRepository : Repository<Location>, ILocationRepository
     {
-        public ResidenceRepository(NativeContext context) : base(context)
+        public LocationRepository(NativeContext context) : base(context)
         {
         }
     }

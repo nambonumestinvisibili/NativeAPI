@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Native.Service.DTOs
 {
-    public class ProfileDTO : IDTOConvertible<Profile>
+    public record ProfileDTO : IDTOConvertible<Profile>
     {
     }
 }
