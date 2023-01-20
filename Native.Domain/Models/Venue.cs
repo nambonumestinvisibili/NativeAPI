@@ -14,5 +14,6 @@ namespace Native.Domain.Models
         public TimeOnly ClosingTime { get; set; }
 
         public ICollection<Interest> Interests { get; set; }
+        public ICollection<ProfileVenue> ProfilesThatVisitedVenue { get; set; }
     }
 }

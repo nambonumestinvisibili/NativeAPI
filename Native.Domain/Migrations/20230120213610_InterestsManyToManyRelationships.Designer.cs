@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Native.Domain.DataAccess;
 
@@ -11,9 +12,11 @@ using Native.Domain.DataAccess;
 namespace Native.Domain.Migrations
 {
     [DbContext(typeof(NativeContext))]
-    partial class NativeContextModelSnapshot : ModelSnapshot
+    [Migration("20230120213610_InterestsManyToManyRelationships")]
+    partial class InterestsManyToManyRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,34 +68,6 @@ namespace Native.Domain.Migrations
                     b.HasIndex("VenuesId");
 
                     b.ToTable("InterestVenue");
-                });
-
-            modelBuilder.Entity("Native.Domain.Models.City", b =>
-                {
-                    b.Property<string>("CountryIsoCode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("Guid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CountryIsoCode", "PostalCode");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("Native.Domain.Models.Event", b =>
@@ -161,169 +136,169 @@ namespace Native.Domain.Migrations
                         new
                         {
                             Id = 1,
-                            Guid = new Guid("8ccf416a-7a3b-40ed-948e-21044db8e3fd"),
+                            Guid = new Guid("39bb242e-4bfa-4c90-979b-f332826112f9"),
                             Name = "Coffe & chat"
                         },
                         new
                         {
                             Id = 2,
-                            Guid = new Guid("afe224fc-9c18-442f-a15d-57de1189b675"),
+                            Guid = new Guid("d9ed22da-13a9-40aa-9ab2-b72aa9933237"),
                             Name = "Walk & talk"
                         },
                         new
                         {
                             Id = 3,
-                            Guid = new Guid("09f5c800-be49-42b0-ae0c-23a01f87c00c"),
+                            Guid = new Guid("c4890aa6-de61-4b04-b488-c9c589653b86"),
                             Name = "Networking"
                         },
                         new
                         {
                             Id = 4,
-                            Guid = new Guid("f8954857-01d1-4b1d-87a1-fb162c9af7e1"),
+                            Guid = new Guid("0e3a2ccd-7d11-4c17-8b76-1f2aa1c20b67"),
                             Name = "Cinema"
                         },
                         new
                         {
                             Id = 5,
-                            Guid = new Guid("cdd58bb4-f5ad-46a7-8a2f-9bb9416a34e9"),
+                            Guid = new Guid("250fcfdc-28ab-4507-a4e3-355bb5900379"),
                             Name = "Theatre"
                         },
                         new
                         {
                             Id = 6,
-                            Guid = new Guid("e877cba3-df2d-4813-9a33-5c062dc07396"),
+                            Guid = new Guid("6efa59d7-8247-4afd-9ab9-c53e18f8bd40"),
                             Name = "Gigs & concerts"
                         },
                         new
                         {
                             Id = 7,
-                            Guid = new Guid("c7d415a6-a7c8-4cbe-994a-59072f875dcd"),
+                            Guid = new Guid("f45bda88-42d9-4387-a129-4842cd256796"),
                             Name = "Shopping"
                         },
                         new
                         {
                             Id = 8,
-                            Guid = new Guid("23183c4e-1676-41c3-8cc3-ddbc0554f352"),
+                            Guid = new Guid("b062067f-4b85-4cf4-8e26-8db74af9b623"),
                             Name = "Bowling"
                         },
                         new
                         {
                             Id = 9,
-                            Guid = new Guid("3707843a-0e05-4cf8-b63d-42105a9a56af"),
+                            Guid = new Guid("669e7f37-99bd-4492-8667-3dca251c0e93"),
                             Name = "Poker"
                         },
                         new
                         {
                             Id = 10,
-                            Guid = new Guid("9f636856-8229-45c5-8805-0dc77e373e2b"),
+                            Guid = new Guid("f711ef89-7817-408a-8846-8f3e42e83c2b"),
                             Name = "Karting"
                         },
                         new
                         {
                             Id = 11,
-                            Guid = new Guid("c7d21f63-0563-40e3-b9a6-52bc770a0f90"),
+                            Guid = new Guid("8b30f25d-8edb-46f7-99c3-205f767435b2"),
                             Name = "Pub quiz"
                         },
                         new
                         {
                             Id = 12,
-                            Guid = new Guid("7226a280-2cfb-4265-a506-054d16a14d85"),
+                            Guid = new Guid("df21ec23-b4eb-480e-9832-2d5d27bd38ed"),
                             Name = "Dancing"
                         },
                         new
                         {
                             Id = 13,
-                            Guid = new Guid("389dfd35-1e7d-42b8-bc9e-1214ed526955"),
+                            Guid = new Guid("3fd201ef-58fa-41cc-b3a5-09f4163d19e0"),
                             Name = "Languages"
                         },
                         new
                         {
                             Id = 14,
-                            Guid = new Guid("4e2e89a4-79fc-4443-a980-9f58714e6dea"),
+                            Guid = new Guid("d51ab234-2c7f-4383-b8ad-8fcb58c7a934"),
                             Name = "Photography"
                         },
                         new
                         {
                             Id = 15,
-                            Guid = new Guid("7dc09e96-c203-4372-83c9-ff24b9ac42ab"),
+                            Guid = new Guid("201aca2c-a441-42af-a0db-c60111b1a075"),
                             Name = "Baking"
                         },
                         new
                         {
                             Id = 16,
-                            Guid = new Guid("47280f98-e020-470d-989e-a8a248b609ff"),
+                            Guid = new Guid("2a755c6e-92fa-4274-8d41-44cc0ede8a4d"),
                             Name = "Satrtups & enterpreneurship"
                         },
                         new
                         {
                             Id = 17,
-                            Guid = new Guid("5723c441-a746-496f-b7bf-5554c7379821"),
+                            Guid = new Guid("6258eb7d-2659-4a0c-8f4b-d8b9a6950a8e"),
                             Name = "Hollistic wellness"
                         },
                         new
                         {
                             Id = 18,
-                            Guid = new Guid("40fe00b7-775e-4ae9-8853-a7f4d7b29baf"),
+                            Guid = new Guid("b55de903-cad0-41b8-8e47-f6ef6800d8dc"),
                             Name = "Nutrition"
                         },
                         new
                         {
                             Id = 19,
-                            Guid = new Guid("c26b9389-9f61-4fd2-b367-b845a350b192"),
+                            Guid = new Guid("d8a260f9-e175-40af-bfbd-627d54e467b6"),
                             Name = "Reading"
                         },
                         new
                         {
                             Id = 20,
-                            Guid = new Guid("12379ac5-5e7d-4138-a878-1cbf9672f63d"),
+                            Guid = new Guid("e4f109b9-cb0d-4249-83c7-dd8105537c79"),
                             Name = "Writing"
                         },
                         new
                         {
                             Id = 21,
-                            Guid = new Guid("42a7db09-cdf9-4a09-ba2d-b571ed6628f8"),
+                            Guid = new Guid("bd47b816-0f80-4ad3-8802-4cb19b731618"),
                             Name = "Gardening"
                         },
                         new
                         {
                             Id = 22,
-                            Guid = new Guid("409bb0f5-2d07-44d8-aa8a-4a3c43dbdb31"),
+                            Guid = new Guid("a33dbc9b-411b-4374-97f5-6bf06df69c0f"),
                             Name = "Neighbourhood "
                         },
                         new
                         {
                             Id = 23,
-                            Guid = new Guid("1a843b5d-15aa-4509-b2e9-781794a33320"),
+                            Guid = new Guid("ca52695b-8eeb-4550-a9be-284b2a3ece85"),
                             Name = "Hiking"
                         },
                         new
                         {
                             Id = 24,
-                            Guid = new Guid("c432aa06-f5aa-45c2-a928-388e2bbed6fc"),
+                            Guid = new Guid("0fc50f00-5713-475f-a22b-731d194819e6"),
                             Name = "Picnic"
                         },
                         new
                         {
                             Id = 25,
-                            Guid = new Guid("0ccd71cb-abe1-45dc-9196-13853e01693f"),
+                            Guid = new Guid("57c98ea7-36b2-4bfc-abf2-025c4eef538e"),
                             Name = "Dog walking"
                         },
                         new
                         {
                             Id = 26,
-                            Guid = new Guid("d615514e-03fb-477f-8b46-047c8f3f71ea"),
+                            Guid = new Guid("8924b8a5-7e19-4375-8c18-d5bc47e71e55"),
                             Name = "Outdoor activities"
                         },
                         new
                         {
                             Id = 27,
-                            Guid = new Guid("375ab950-95f9-410c-9aca-02c93dafa7b5"),
+                            Guid = new Guid("779d8b8d-91b1-4369-b8bc-bd0adf30cea6"),
                             Name = "Traveling abroad"
                         },
                         new
                         {
                             Id = 28,
-                            Guid = new Guid("6d8bdcf1-874f-42d5-8fbd-72abe6ebb41b"),
+                            Guid = new Guid("b7751e79-c313-47f7-8dab-c1b6276b60ae"),
                             Name = "Camping"
                         });
                 });
@@ -343,7 +318,12 @@ namespace Native.Domain.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProfileId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Residences");
                 });
@@ -370,32 +350,6 @@ namespace Native.Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Profiles");
-                });
-
-            modelBuilder.Entity("Native.Domain.Models.ProfileCity", b =>
-                {
-                    b.Property<int>("ProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CityCountryIsoCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CityPostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsProfileNativeToTheCity")
-                        .HasColumnType("bit");
-
-                    b.HasKey("ProfileId", "CityId");
-
-                    b.HasIndex("CityCountryIsoCode", "CityPostalCode");
-
-                    b.ToTable("ProfileCity");
                 });
 
             modelBuilder.Entity("Native.Domain.Models.ProfileEvent", b =>
@@ -517,17 +471,6 @@ namespace Native.Domain.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Native.Domain.Models.City", b =>
-                {
-                    b.HasOne("Native.Domain.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Location");
-                });
-
             modelBuilder.Entity("Native.Domain.Models.Event", b =>
                 {
                     b.HasOne("Native.Domain.Models.Profile", "Organiser")
@@ -547,23 +490,11 @@ namespace Native.Domain.Migrations
                     b.Navigation("Residence");
                 });
 
-            modelBuilder.Entity("Native.Domain.Models.ProfileCity", b =>
+            modelBuilder.Entity("Native.Domain.Models.Location", b =>
                 {
-                    b.HasOne("Native.Domain.Models.Profile", "Profile")
-                        .WithMany("CitiesThatTheProfileVisited")
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Native.Domain.Models.City", "City")
-                        .WithMany("ProfilesWhichVisitedTheCity")
-                        .HasForeignKey("CityCountryIsoCode", "CityPostalCode")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("City");
-
-                    b.Navigation("Profile");
+                    b.HasOne("Native.Domain.Models.Profile", null)
+                        .WithMany("Residences")
+                        .HasForeignKey("ProfileId");
                 });
 
             modelBuilder.Entity("Native.Domain.Models.ProfileEvent", b =>
@@ -612,11 +543,6 @@ namespace Native.Domain.Migrations
                     b.Navigation("Venue");
                 });
 
-            modelBuilder.Entity("Native.Domain.Models.City", b =>
-                {
-                    b.Navigation("ProfilesWhichVisitedTheCity");
-                });
-
             modelBuilder.Entity("Native.Domain.Models.Event", b =>
                 {
                     b.Navigation("InvitedGuests");
@@ -624,9 +550,9 @@ namespace Native.Domain.Migrations
 
             modelBuilder.Entity("Native.Domain.Models.Profile", b =>
                 {
-                    b.Navigation("CitiesThatTheProfileVisited");
-
                     b.Navigation("ProfileEvents");
+
+                    b.Navigation("Residences");
 
                     b.Navigation("VisitedVenues");
                 });

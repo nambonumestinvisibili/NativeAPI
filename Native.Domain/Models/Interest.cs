@@ -13,5 +13,7 @@ namespace Native.Domain.Models
         public string Name { get; set; }
 
         public ICollection<Venue> Venues { get; set; }
+        public ICollection<Event> Events { get; set; }
+        public ICollection<Profile> Profiles { get; set; }
     }
 }

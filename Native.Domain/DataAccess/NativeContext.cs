@@ -26,7 +26,12 @@ namespace Native.Domain.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             SeedInterests(modelBuilder);
+            
             ConfigureProfileEventManyToManyRelationship(modelBuilder);
+            ConfigureProfileVenueManyToManyRelationship(modelBuilder);
+            ConfigureProfileCityManyToManyRelationship(modelBuilder);
+
+            modelBuilder.Entity<City>().HasKey(city => new { city.CountryIsoCode, city.PostalCode });
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder builder)
@@ -66,12 +71,43 @@ namespace Native.Domain.DataAccess
                 .OnDelete(DeleteBehavior.NoAction);
         }
 
+        private static void ConfigureProfileVenueManyToManyRelationship(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProfileVenue>()
+                .HasKey(profileVenue => new { profileVenue.ProfileId, profileVenue.VenueId });
+            modelBuilder.Entity<ProfileVenue>()
+                .HasOne(pv => pv.Profile)
+                .WithMany(p => p.VisitedVenues)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ProfileVenue>()
+                .HasOne(pv => pv.Venue)
+                .WithMany(v => v.ProfilesThatVisitedVenue)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
+
+        private static void ConfigureProfileCityManyToManyRelationship(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProfileCity>()
+                .HasKey(profileVenue => new { profileVenue.ProfileId, profileVenue.CityId });
+            modelBuilder.Entity<ProfileCity>()
+                .HasOne(pc => pc.Profile)
+                .WithMany(p => p.CitiesThatTheProfileVisited)
+                .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ProfileCity>()
+                .HasOne(pc => pc.City)
+                .WithMany(c => c.ProfilesWhichVisitedTheCity)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
+
         public DbSet<Venue> Venues { get; set; }
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Location> Residences { get; set; }
+        public DbSet<City> Cities { get; set; }
         public DbSet<ProfileEvent> ProfileEvents { get; set; }
+        public DbSet<ProfileVenue> ProfileVenues { get; set; }
+        public DbSet<ProfileCity> ProfileCity { get; set; }
 
     }
 
