@@ -1,5 +1,4 @@
 ﻿using Native.Domain.Models;
-using Native.Service.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Native.Service.Services.Interfaces
 {
-    public interface IProfileService : IResourceService<Profile>
+    public interface ICityService : IResourceService<City>
     {
-        Task CreateNewProfile(ProfileDTO profileDTO);
     }
 }

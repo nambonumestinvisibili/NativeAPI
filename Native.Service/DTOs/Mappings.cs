@@ -12,8 +12,12 @@ namespace Native.Service.DTOs
     {
         public Mappings() 
         {
-            CreateMap<InterestDTO, Interest>().ReverseMap();
-            CreateMap<VenueDTO, Venue>().ReverseMap();
+            CreateMap<Interest, InterestDTO>().ReverseMap();
+            CreateMap<Venue, VenueDTO>().ReverseMap();
+            CreateMap<City, CityDTO>().ReverseMap();
+            CreateMap<Event, EventDTO>().ReverseMap();
+            CreateMap<Domain.Models.Profile, ProfileDTO>().ReverseMap();
+            CreateMap<Location, LocationDTO>().ReverseMap();
         }
     }
 }

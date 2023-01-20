@@ -8,6 +8,9 @@ namespace Native.Domain.Models
 {
     public class Profile : Entity
     {
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public DateTime BirthDayDate { get; set; }
         public string Bio { get; set; }
         public string Introduction { get; set; }
         public ICollection<ProfileCity> CitiesThatTheProfileVisited { get; set; }

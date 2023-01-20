@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Native.API.Requests;
 using Native.Service.DTOs;
 using Native.Service.Services.Interfaces;
 using System;
@@ -21,5 +23,13 @@ namespace Native.API.Controllers
         [HttpGet("{guid}")]
         public async Task<IActionResult> GetProfile(Guid guid) =>
             Ok(await _profileService.GetByGuid<ProfileDTO>(guid));
+
+        [HttpPost]
+        public async Task<IActionResult> CreateProfile(CreateProfileRequest request)
+        {
+            var profileDTO = _mapper.Map<ProfileDTO>(request);
+            await _profileService.CreateNewProfile(profileDTO);
+            return StatusCode(StatusCodes.Status201Created);
+        }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Native.API.Requests
 {
-    public readonly struct TimeOfTheDay
+    public record TimeOfTheDay
     {
         [Range(0, 23)]
         public int HourOfDay { get; init; }

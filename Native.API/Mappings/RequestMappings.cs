@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Native.API.Requests;
 using Native.Domain.Models;
+using Native.Service.DTOs;
 using Native.Services.Requests;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,9 @@ namespace Native.API.Mappings
                 .ForMember(s => s.OpeningTime, opt => opt.ConvertUsing(new TimeOfTheDayConverter()))
                 .ForMember(s => s.ClosingTime, opt => opt.ConvertUsing(new TimeOfTheDayConverter()))
                 .ForSourceMember(s => s.InterestGuids, opt => opt.DoNotValidate())
+                .ReverseMap();
+
+            CreateMap<CreateProfileRequest, ProfileDTO>()
                 .ReverseMap();
 
             //CreateMap<Source, Target>

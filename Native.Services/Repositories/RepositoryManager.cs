@@ -18,6 +18,7 @@ namespace Native.Repositories.Repositories
         private ILocationRepository? _residenceRepository;
         private IProfileRepository? _profileRepository;
         private IEventRepository? _eventRepository;
+        private ICityRepository? _cityRepository;
         private readonly NativeContext _nativeContext;
 
         public RepositoryManager(NativeContext nativeContext)
@@ -30,6 +31,7 @@ namespace Native.Repositories.Repositories
         public IEventRepository Event => _eventRepository ??= new EventRepository(_nativeContext);
         public ILocationRepository Location => _residenceRepository ??= new LocationRepository(_nativeContext);
         public IProfileRepository Profile => _profileRepository ??= new ProfileRepository(_nativeContext);
+        public ICityRepository City => _cityRepository ??= new CityRepository(_nativeContext);
 
         public async Task Save() => await _nativeContext.SaveChangesAsync();
 
@@ -42,6 +44,7 @@ namespace Native.Repositories.Repositories
                 nameof(Event) => (IRepository<T>) Event,
                 nameof(Location) => (IRepository<T>) Location,
                 nameof(Profile) => (IRepository<T>) Profile,
+                nameof(City) => (IRepository<T>) City,
                 _ => throw new InvalidOperationException("There is no repository for this resource")
             });
         }
