@@ -1,6 +1,8 @@
 ﻿using CsvHelper;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Native.Domain.Configuration;
 using Native.Domain.Models;
 using Native.Domain.Seed;
 using System;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Native.Domain.DataAccess
 {
-    public class NativeContext : DbContext
+    public class NativeContext : IdentityDbContext<User>
     {
 
         public NativeContext(DbContextOptions options)
@@ -25,6 +27,10 @@ namespace Native.Domain.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
             SeedInterests(modelBuilder);
             
             ConfigureProfileEventManyToManyRelationship(modelBuilder);

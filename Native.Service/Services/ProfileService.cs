@@ -18,7 +18,7 @@ namespace Native.Service.Services
 
         public Task CreateNewProfile(ProfileDTO profileDTO)
         {
-            
+            return null;
         }
     }
 }

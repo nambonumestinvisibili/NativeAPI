@@ -4,9 +4,13 @@ using Native.Services;
 using Native.Domain;
 using Native.Repositories;
 using Native.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var configuration = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -18,6 +22,28 @@ builder.Services.ConfigureDbContext(builder.Configuration.GetConnectionString("N
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureNativeServices();
 builder.Services.ConfigureControllers();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    var jwtConfig = configuration.GetSection("Jwt");
+    o.TokenValidationParameters = new()
+    {
+        ValidIssuer = jwtConfig["JwtIssuer"],
+        ValidAudience = jwtConfig["JwtAudience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig["JWtKey"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+    };
+    o.SaveToken = true;
+});
+builder.Services.AddAuthorization();
+builder.Services.ConfigureIdentity();
 
 builder.Services.AddAutoMapper(
     typeof(Native.Domain.Extensions),
@@ -37,6 +63,8 @@ if (app.Environment.IsDevelopment())
 app.ConfigureExceptionHandler();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

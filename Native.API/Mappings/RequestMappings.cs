@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LanguageExt;
 using Native.API.Requests;
 using Native.Domain.Models;
 using Native.Service.DTOs;
@@ -29,6 +30,22 @@ namespace Native.API.Mappings
 
             CreateMap<CreateProfileRequest, ProfileDTO>()
                 .ReverseMap();
+
+            CreateMap<AppleCreateUserRequest, ThirdParyTokenLoginOrCreateAccountDTO>()
+                .ConstructUsing(src => new ThirdParyTokenLoginOrCreateAccountDTO(
+                    src.User,
+                    src.IdentityToken,
+                    src.Email,
+                    null,//src.FullName == null ? null : src.FullName.GivenName ?? null,
+                    null//src.FullName == null ? null : src.FullName.FamilyName ?? null
+                    //Option<AppleFullName>.Some(src.FullName)
+                    //    .Some(fullname => fullname.GivenName)
+                    //    .None(() => null!),
+                    //Option<AppleFullName>.Some(src.FullName)
+                    //    .Some(fullname => fullname.FamilyName)
+                    //    .None(() => null!)
+                    )); ; ;
+
 
             //CreateMap<Source, Target>
         }

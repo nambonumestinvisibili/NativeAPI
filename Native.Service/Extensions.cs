@@ -13,6 +13,7 @@ namespace Native.Service
             services.AddScoped<IProfileService, ProfileService>();
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IResidenceService, ResidenceService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
     }
