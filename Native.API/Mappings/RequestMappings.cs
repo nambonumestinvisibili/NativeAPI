@@ -36,14 +36,14 @@ namespace Native.API.Mappings
                     src.User,
                     src.IdentityToken,
                     src.Email,
-                    null,//src.FullName == null ? null : src.FullName.GivenName ?? null,
-                    null//src.FullName == null ? null : src.FullName.FamilyName ?? null
-                    //Option<AppleFullName>.Some(src.FullName)
-                    //    .Some(fullname => fullname.GivenName)
-                    //    .None(() => null!),
-                    //Option<AppleFullName>.Some(src.FullName)
-                    //    .Some(fullname => fullname.FamilyName)
-                    //    .None(() => null!)
+                    src.FullName == null ? null : src.FullName.GivenName ?? null,//src.FullName == null ? null : src.FullName.GivenName ?? null,
+                    src.FullName == null ? null : src.FullName.FamilyName ?? null//src.FullName == null ? null : src.FullName.FamilyName ?? null
+                                                                                 //Option<AppleFullName>.Some(src.FullName)
+                                                                                 //    .Some(fullname => fullname.GivenName)
+                                                                                 //    .None(() => null!),
+                                                                                 //Option<AppleFullName>.Some(src.FullName)
+                                                                                 //    .Some(fullname => fullname.FamilyName)
+                                                                                 //    .None(() => null!)
                     )); ; ;
 
 

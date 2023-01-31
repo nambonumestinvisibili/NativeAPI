@@ -43,7 +43,7 @@ namespace Native.Service.Services
 
         private async Task<string> LoginUser(string user, string identityToken) 
         {
-            if (ValidateRequestForLogin(user, identityToken))
+            if (!ValidateRequestForLogin(user, identityToken))
             {
                 throw new Exception("!!!");
             }
@@ -57,7 +57,7 @@ namespace Native.Service.Services
 
         private async Task<string> CreateUser(ThirdParyTokenLoginOrCreateAccountDTO request)
         {
-            if (ValidateRequestForCreate(request))
+            if (!ValidateRequestForCreate(request))
             {
                 throw new Exception("!!!");
             }
@@ -71,13 +71,15 @@ namespace Native.Service.Services
             {
                 FirstName = request.GivenName!,
                 SecondName = request.FamilyName!,
+                Bio = "",
+                Introduction = ""
             };
             
             User user = new()
             {
                 Email = request.Email,
                 UserName = request.User,
-                Profile = profile
+                Profile = profile,
             };
 
             var result = await _userManager.CreateAsync(user);

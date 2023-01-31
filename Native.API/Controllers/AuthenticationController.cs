@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Native.API.Requests;
@@ -22,11 +24,10 @@ namespace Native.API.Controllers
             _userService = userService;
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> RegisterWithApple(AppleCreateUserRequest request)
-        {
-            await _userService.CreateOrLoginUser(_mapper.Map<ThirdParyTokenLoginOrCreateAccountDTO>(request));
-            return null;
-        }
+        public async Task<IActionResult> RegisterWithApple(AppleCreateUserRequest request) =>
+            Ok(await _userService.CreateOrLoginUser(_mapper.Map<ThirdParyTokenLoginOrCreateAccountDTO>(request)));
+        
     }
 }
