@@ -19,7 +19,7 @@ namespace Native.Service.Services
     //[AllowAnonymous]
     public class UserService : IUserService
     {
-        private readonly string APPLE_JWKS_ENDPOINT = "https://appleid.apple.com/auth/keys";
+        private readonly string APPLE_JWKS_ENDPOINT;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
 
@@ -27,6 +27,7 @@ namespace Native.Service.Services
         {
             _userManager = userManager;
             _configuration = configuration;
+            APPLE_JWKS_ENDPOINT = configuration["Jwt:AppleTokenValidationUrl"]!;
         }
 
         public async Task<string> CreateOrLoginUser(ThirdParyTokenLoginOrCreateAccountDTO request)
