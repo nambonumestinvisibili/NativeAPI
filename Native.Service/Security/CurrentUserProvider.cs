@@ -17,9 +17,10 @@ namespace Native.Service.Security
             _context = context;
         }
 
-        public string GetUserName()
+        public string GetUserGuid()
         {
-            return _context.HttpContext.User.Claims.First(claims => claims.Type == ClaimTypes.Name).Value;
+            return _context.HttpContext.User.Claims
+                .First(claims => claims.Type == ClaimTypes.NameIdentifier).Value;
         }
     }
 }

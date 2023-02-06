@@ -10,6 +10,7 @@ namespace Native.Domain.Models
     public class User : IdentityUser
     {
         public Profile Profile { get; set; }
+        public string AppleUserId { get; set; }
 
         public bool IsProfileCompleted => 
             new List<object>{ 

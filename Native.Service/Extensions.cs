@@ -14,6 +14,11 @@ namespace Native.Service
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IResidenceService, ResidenceService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<TokenService>();
+
+#if DEBUG
+            services.AddScoped<IFakeUserService, FakeUserService>();
+#endif
         }
 
     }

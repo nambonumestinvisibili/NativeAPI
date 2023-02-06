@@ -8,6 +8,6 @@ namespace Native.Service.Security
 {
     public interface ICurrentUserProvider
     {
-        string GetUserName();
+        string GetUserGuid();
     }
 }
