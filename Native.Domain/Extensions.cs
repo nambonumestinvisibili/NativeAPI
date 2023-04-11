@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Native.Domain.Models;
 using Native.Domain.DataAccess;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace Native.Domain
 {
@@ -29,6 +31,11 @@ namespace Native.Domain
             builder
                 .AddEntityFrameworkStores<NativeContext>()
                 .AddDefaultTokenProviders();
+
+            services.TryAddScoped<SignInManager<User>>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
         }
 
         private static string GetAssemblyName() => typeof(Venue).Assembly.GetName().Name!;

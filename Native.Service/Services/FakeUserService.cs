@@ -22,41 +22,41 @@ namespace Native.Service.Services
 
         public async Task<string> LoginAsFakeUser(string fakeAppleUserId)
         {
-            User? user = _userManager.Users
-                .Include(userProperties => userProperties.Profile)
-                .FirstOrDefault(dbUser => dbUser.AppleUserId == fakeAppleUserId);
+            //User? user = _userManager.Users
+            //    .Include(userProperties => userProperties.Profile)
+            //    .FirstOrDefault(dbUser => dbUser.AppleUserId == fakeAppleUserId);
 
-            if (user == null) 
-            {
-                Profile profile = new()
-                {
-                    Guid = Guid.NewGuid(),
-                    FirstName = fakeAppleUserId,
-                    SecondName = fakeAppleUserId,
-                    Bio = "Hello! I am a Fake Bio",
-                    Introduction = "Hello! I am a fake description!"
-                };
+            //if (user == null) 
+            //{
+            //    Profile profile = new()
+            //    {
+            //        Guid = Guid.NewGuid(),
+            //        FirstName = fakeAppleUserId,
+            //        SecondName = fakeAppleUserId,
+            //        Bio = "Hello! I am a Fake Bio",
+            //        Introduction = "Hello! I am a fake description!"
+            //    };
 
-                User newUser = new()
-                {
-                    Email = "dummy-email@fake-domain.com",
-                    UserName = "fakeUserName",
-                    Profile = profile,
-                    AppleUserId = fakeAppleUserId
-                };
+            //    User newUser = new()
+            //    {
+            //        Email = "dummy-email@fake-domain.com",
+            //        UserName = "fakeUserName",
+            //        Profile = profile,
+            //        AppleUserId = fakeAppleUserId
+            //    };
 
-                var result = await _userManager.CreateAsync(newUser);
-                
-                if (result.Succeeded)
-                {
-                    return _tokenService.GenerateToken(newUser);
-                } else
-                {
-                    throw new Exception("New fake user couldnt have been created");
-                }
-            }
-            return _tokenService.GenerateToken(user);
+            //    var result = await _userManager.CreateAsync(newUser);
 
+            //    if (result.Succeeded)
+            //    {
+            //        return _tokenService.GenerateToken(newUser);
+            //    } else
+            //    {
+            //        throw new Exception("New fake user couldnt have been created");
+            //    }
+            //}
+            //return _tokenService.GenerateToken(user);
+            return null;
         }
     }
 }

@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Native.Domain.Models;
+using Native.Repositories.Infrastructure.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +15,10 @@ namespace Native.Service.Security
     internal class CurrentUserProvider : ICurrentUserProvider
     {
         private readonly IHttpContextAccessor _context;
-
-        public CurrentUserProvider(IHttpContextAccessor context)
+        private readonly UserManager<User> _userManager;
+        public CurrentUserProvider(IHttpContextAccessor context, UserManager<User> userManager)
         {
+            _userManager = userManager; 
             _context = context;
         }
 
@@ -21,6 +26,14 @@ namespace Native.Service.Security
         {
             return _context.HttpContext.User.Claims
                 .First(claims => claims.Type == ClaimTypes.NameIdentifier).Value;
+        }
+
+        public async Task<User> GetUser()
+        {
+            return await _userManager.Users.Include(user => user.Profile)
+                .FirstOrDefaultAsync(dbUser => dbUser.Profile.Guid.ToString() 
+                    == _context.HttpContext.User.Claims.First(claims => claims.Type == ClaimTypes.NameIdentifier).Value) 
+                ?? throw new UserNotFoundException();
         }
     }
 }

@@ -22,6 +22,7 @@ builder.Services.ConfigureDbContext(builder.Configuration.GetConnectionString("N
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureNativeServices();
 builder.Services.ConfigureControllers();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

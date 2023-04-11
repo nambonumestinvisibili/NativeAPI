@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Native.API.Requests;
 using Native.Domain.Models;
 using Native.Service.DTOs;
+using Native.Service.DTOs.Request;
 using Native.Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -34,19 +35,20 @@ namespace Native.API.Controllers
             _environment = webHostEnvironment;
         }
 
-#if DEBUG
-        [AllowAnonymous]
-        [HttpGet("fakeLogin")]
-        public async Task<IActionResult> LoginAsFakeUser(string fakeAppleUserId) =>
-            _environment.IsDevelopment()
-                ? Ok(await _fakeUserService.LoginAsFakeUser(fakeAppleUserId))
-                : Unauthorized();
-#endif
-
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> RegisterWithApple(AppleCreateUserRequest request) =>
-            Ok(await _userService.CreateOrLoginUser(_mapper.Map<ThirdParyTokenLoginOrCreateAccountDTO>(request)));
-        
+        public async Task<IActionResult> Login(LoginRequest loginRequest)
+        {
+            string? token = await _userService.Login(loginRequest);
+            return token == null ? Unauthorized() : Ok(token);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("signUp")]
+        public async Task<IActionResult> SignUp(SignUpRequest signUpRequest)
+        {
+            string? token = await _userService.SignUp(signUpRequest);
+            return token == null ? Unauthorized() : Ok(token);
+        }
     }
 }

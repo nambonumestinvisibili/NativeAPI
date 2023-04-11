@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Native.Domain.Models;
 using Native.Services;
 using System;
 using System.Collections.Generic;

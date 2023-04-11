@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Native.Domain.Models;
+using Native.Repositories.Infrastructure.Exceptions;
 using Native.Service.DTOs;
+using Native.Service.DTOs.Request;
 using Native.Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,64 +21,50 @@ namespace Native.Service.Services
 {
     public class UserService : IUserService
     {
-        private readonly string APPLE_JWKS_ENDPOINT;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly TokenService _tokenService;
 
         public UserService(UserManager<User> userManager, 
             IConfiguration configuration,
-            TokenService tokenService)
+            TokenService tokenService, SignInManager<User> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
             _configuration = configuration;
             _tokenService = tokenService;
-            APPLE_JWKS_ENDPOINT = configuration["Jwt:AppleTokenValidationUrl"]!;
         }
 
-        public async Task<string> CreateOrLoginUser(ThirdParyTokenLoginOrCreateAccountDTO request)
+        public async Task<string?> Login(LoginRequest loginRequest)
         {
-            if (request.Email == null)
+            if (!ValidateRequestForLogin(loginRequest))
             {
-                return await LoginUser(request.User, request.IdentityToken);
-            }   
-            else
-            {
-                return await CreateUser(request);
+                throw new Exception("Missing request parameters");
             }
+
+            User user = await _userManager.Users
+                .Include(user => user.Profile)
+                .FirstOrDefaultAsync(dbUser => dbUser.Email == loginRequest.Email)
+                ?? throw new UserNotFoundException();
+            
+            var result = await _signInManager.CheckPasswordSignInAsync(
+                user,
+                loginRequest.Password,
+                lockoutOnFailure: false);
+            
+            if (result.Succeeded)
+            {
+                return _tokenService.GenerateToken(user);
+            }
+            return null;
         }
 
-        private async Task<string> LoginUser(string userId, string identityToken) 
-        {
-            if (!ValidateRequestForLogin(userId, identityToken))
-            {
-                throw new Exception("Login object not proper");
-            }
-            if (!await TokenService.ValidateAppleToken(identityToken, APPLE_JWKS_ENDPOINT))
-            {
-                throw new Exception("Not an Apple token.");
-            }
-
-            User? user = await _userManager.Users
-                .FirstOrDefaultAsync(dbUser => dbUser.AppleUserId == userId);
-
-            if (user == null)
-            {
-                throw new Exception("User doesn't exist");
-            }
-            return _tokenService.GenerateToken(user);
-        }
-
-        private async Task<string> CreateUser(ThirdParyTokenLoginOrCreateAccountDTO request)
+        public async Task<string?> SignUp(SignUpRequest request)
         {
             if (!ValidateRequestForCreate(request))
             {
-                throw new Exception("!!!");
-            }
-
-            if (!await TokenService.ValidateAppleToken(request.IdentityToken, APPLE_JWKS_ENDPOINT))
-            {
-                throw new Exception("FUCK OFFF!!!!");
+                throw new Exception("Missing request parameters");
             }
 
             Profile profile = new()
@@ -87,37 +75,36 @@ namespace Native.Service.Services
                 Bio = "",
                 Introduction = ""
             };
-            
+
             User user = new()
             {
-                AppleUserId = request.User,
                 Email = request.Email,
-                UserName = request.User,
+                UserName = request.UserName,
                 Profile = profile,
             };
 
-            var result = await _userManager.CreateAsync(user);
-            
+            var result = await _userManager.CreateAsync(user, request.Password);
+
             if (result.Succeeded)
             {
                 return _tokenService.GenerateToken(user);
             }
-            throw new Exception("Error");
+
+            throw new Exception("Couldnt create user");
         }
 
-        private static bool ValidateRequestForCreate(ThirdParyTokenLoginOrCreateAccountDTO request) => new[]
+        private static bool ValidateRequestForCreate(SignUpRequest request) => new[]
         {
+            request.UserName,
             request.Email,
-            request.User,
             request.FamilyName,
             request.GivenName,
-            request.IdentityToken
         }.All(data => !data.IsNullOrEmpty());
 
-        private static bool ValidateRequestForLogin(string user, string identityToken) => new[]
+        private static bool ValidateRequestForLogin(LoginRequest request) => new[]
         {
-            user,
-            identityToken
+            request.Email,
+            request.Password
         }.All(data => !data.IsNullOrEmpty());
 
     }

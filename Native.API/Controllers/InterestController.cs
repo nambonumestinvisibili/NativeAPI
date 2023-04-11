@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace Native.API.Controllers
 {
+    [AllowAnonymous]
+
     public class InterestController : NativeApiController
     {
         private readonly IInterestService _interestService;
