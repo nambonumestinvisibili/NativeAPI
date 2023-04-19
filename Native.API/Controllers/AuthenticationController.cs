@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Native.API.Requests;
 using Native.Domain.Models;
 using Native.Service.DTOs;
@@ -18,18 +19,23 @@ using System.Threading.Tasks;
 
 namespace Native.API.Controllers
 {
+    [AllowAnonymous]
     public class AuthenticationController : NativeApiController
     {
         private readonly IUserService _userService;
         private readonly IFakeUserService _fakeUserService;
         private readonly IWebHostEnvironment _environment;
+        private readonly ILogger _logger;
+
         public AuthenticationController(
             IMapper mapper,
             IUserService userService,
             IFakeUserService fakeUserService,
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment,
+            ILogger<AuthenticationController> logger)
             : base(mapper)
         {
+            _logger = logger;
             _userService = userService;
             _fakeUserService = fakeUserService;
             _environment = webHostEnvironment;
@@ -49,6 +55,13 @@ namespace Native.API.Controllers
         {
             string? token = await _userService.SignUp(signUpRequest);
             return token == null ? Unauthorized() : Ok(token);
+        }
+
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _userService.Logout();
+            return Ok();
         }
     }
 }

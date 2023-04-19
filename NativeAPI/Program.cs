@@ -10,6 +10,12 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
+builder.Logging.AddTraceSource("Information, ActivityTracing");
+
 var configuration = builder.Configuration;
 // Add services to the container.
 
@@ -46,6 +52,14 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 builder.Services.ConfigureIdentity();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder => builder.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+
 builder.Services.AddAutoMapper(
     typeof(Native.Domain.Extensions),
     typeof(Native.Repositories.Extensions),
@@ -62,7 +76,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.ConfigureExceptionHandler();
-
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

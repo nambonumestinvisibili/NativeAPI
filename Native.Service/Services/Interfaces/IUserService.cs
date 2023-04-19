@@ -12,5 +12,6 @@ namespace Native.Service.Services.Interfaces
     {
         Task<string?> Login(LoginRequest loginRequest);
         Task<string?> SignUp(SignUpRequest signUpRequest);
+        Task Logout();
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Native.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -29,10 +30,9 @@ namespace Native.Service.Services
             {
                 Subject = new ClaimsIdentity(new[] //explain
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Profile.Guid.ToString()),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(ClaimTypes.NameIdentifier, user.Profile.Guid.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Jwt:ExpirationTimeInMinutes"]!)),
                 Issuer = issuer,
@@ -48,6 +48,7 @@ namespace Native.Service.Services
             return stringToken;
         }
 
+        #region [Unused - Apple validation]
         public static async Task<bool> ValidateAppleToken(string identityToken, string endpoint)
         {
             JwtSecurityToken securityToken = new(identityToken);
@@ -100,6 +101,7 @@ namespace Native.Service.Services
                 return false;
             }
         }
+        #endregion
 
     }
 }

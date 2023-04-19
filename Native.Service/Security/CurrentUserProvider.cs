@@ -30,9 +30,11 @@ namespace Native.Service.Security
 
         public async Task<User> GetUser()
         {
+            var claims = _context.HttpContext.User.Claims.ToList();  
+            var userGuidFromClaim = claims.First(claims => claims.Type == ClaimTypes.NameIdentifier).Value;
             return await _userManager.Users.Include(user => user.Profile)
                 .FirstOrDefaultAsync(dbUser => dbUser.Profile.Guid.ToString() 
-                    == _context.HttpContext.User.Claims.First(claims => claims.Type == ClaimTypes.NameIdentifier).Value) 
+                    == userGuidFromClaim) 
                 ?? throw new UserNotFoundException();
         }
     }

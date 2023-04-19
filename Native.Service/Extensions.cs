@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Native.Service.Security;
 using Native.Service.Services;
 using Native.Service.Services.Interfaces;
 
@@ -14,6 +15,7 @@ namespace Native.Service
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IResidenceService, ResidenceService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
             services.AddScoped<TokenService>();
 
 #if DEBUG

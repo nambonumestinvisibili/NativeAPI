@@ -1,4 +1,5 @@
 ﻿using LanguageExt;
+using LanguageExt.Pipes;
 using LanguageExt.SomeHelp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using Native.Domain.Models;
 using Native.Repositories.Infrastructure.Exceptions;
 using Native.Service.DTOs;
 using Native.Service.DTOs.Request;
+using Native.Service.Security;
 using Native.Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,15 +27,19 @@ namespace Native.Service.Services
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly TokenService _tokenService;
+        private readonly ICurrentUserProvider _currentUserProvider;
 
         public UserService(UserManager<User> userManager, 
             IConfiguration configuration,
-            TokenService tokenService, SignInManager<User> signInManager)
+            TokenService tokenService, 
+            SignInManager<User> signInManager,
+            ICurrentUserProvider currentUserProvider)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _tokenService = tokenService;
+            _currentUserProvider = currentUserProvider;
         }
 
         public async Task<string?> Login(LoginRequest loginRequest)
@@ -52,7 +58,10 @@ namespace Native.Service.Services
                 user,
                 loginRequest.Password,
                 lockoutOnFailure: false);
-            
+
+            await InvalidateToken(user);
+
+
             if (result.Succeeded)
             {
                 return _tokenService.GenerateToken(user);
@@ -85,12 +94,19 @@ namespace Native.Service.Services
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            if (result.Succeeded)
+            if (result.Succeeded) //TODO: better errors
             {
                 return _tokenService.GenerateToken(user);
             }
 
             throw new Exception("Couldnt create user");
+        }
+
+        public async Task Logout()
+        {
+            User user = await _currentUserProvider.GetUser();
+
+            await InvalidateToken(user);
         }
 
         private static bool ValidateRequestForCreate(SignUpRequest request) => new[]
@@ -107,5 +123,11 @@ namespace Native.Service.Services
             request.Password
         }.All(data => !data.IsNullOrEmpty());
 
+        private async Task InvalidateToken(User user)
+        {
+            // When a user's security stamp is changed, all their existing tokens are invalidated
+            await _userManager.UpdateSecurityStampAsync(user);
+            await _userManager.UpdateAsync(user);
+        }
     }
 }
