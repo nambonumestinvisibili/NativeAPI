@@ -13,5 +13,8 @@ namespace Native.Service.Services.Interfaces
         Task<string?> Login(LoginRequest loginRequest);
         Task<string?> SignUp(SignUpRequest signUpRequest);
         Task Logout();
+        Task RegisterBasicInfo(BasicInfoRegistrationRequest request);
+        Task RegisterBioAndIntro(DescriptionRegistrationRequest request);
+        Task RegisterInterests(List<Guid> interestGuids);
     }
 }

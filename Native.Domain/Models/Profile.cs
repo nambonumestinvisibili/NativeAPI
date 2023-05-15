@@ -8,15 +8,20 @@ namespace Native.Domain.Models
 {
     public class Profile : Entity
     {
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public DateTime BirthDayDate { get; set; }
-        public string Bio { get; set; }
-        public string Introduction { get; set; }
+        public string? FirstName { get; set; }
+        public string? SecondName { get; set; }
+        public DateTime? BirthDayDate { get; set; }
+        public string? Bio { get; set; }
+        public string? Introduction { get; set; }
         public ICollection<ProfileCity> CitiesThatTheProfileVisited { get; set; }
-        public ICollection<Interest> Interests { get; set; }
+        public ICollection<Interest> Interests { get; set; } = new List<Interest>();
         public ICollection<ProfileEvent> ProfileEvents { get; set; }
         public ICollection<ProfileVenue> VisitedVenues { get; set; }
+        public bool IsProfileRegistrationCompleted =>
+            new object[]
+            { FirstName, SecondName, Bio,
+                Introduction, BirthDayDate}.All(data => !(data == null)) 
+            && Interests.Count != 0; 
 
     }
 }

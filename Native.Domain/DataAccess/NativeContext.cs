@@ -115,6 +115,7 @@ namespace Native.Domain.DataAccess
         public DbSet<ProfileVenue> ProfileVenues { get; set; }
         public DbSet<ProfileCity> ProfileCity { get; set; }
 
+
     }
 
     internal class TimeOnlyConverter : ValueConverter<TimeOnly, DateTime>

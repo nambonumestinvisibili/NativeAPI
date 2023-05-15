@@ -19,7 +19,6 @@ using System.Threading.Tasks;
 
 namespace Native.API.Controllers
 {
-    [AllowAnonymous]
     public class AuthenticationController : NativeApiController
     {
         private readonly IUserService _userService;
@@ -55,6 +54,27 @@ namespace Native.API.Controllers
         {
             string? token = await _userService.SignUp(signUpRequest);
             return token == null ? Unauthorized() : Ok(token);
+        }
+
+        [HttpPost("register/basics")]
+        public async Task<IActionResult> RegisterName(BasicInfoRegistrationRequest request)
+        {
+            await _userService.RegisterBasicInfo(request);
+            return Ok();
+        }
+
+        [HttpPost("register/description")]
+        public async Task<IActionResult> RegisterBioAndIntro(DescriptionRegistrationRequest request)
+        {
+            await _userService.RegisterBioAndIntro(request);
+            return Ok();
+        }
+
+        [HttpPost("register/interests")]
+        public async Task<IActionResult> RegisterInterests(List<Guid> interestGuids)
+        {
+            await _userService.RegisterInterests(interestGuids);
+            return Ok();
         }
 
         [HttpGet("logout")]

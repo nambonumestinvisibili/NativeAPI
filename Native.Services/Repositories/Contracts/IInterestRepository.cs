@@ -10,5 +10,6 @@ namespace Native.Repositories.Repositories.Contracts
 {
     public interface IInterestRepository : IRepository<Interest>
     {
+        Task AddInterestsToUser(IEnumerable<Guid> interestGuids, Profile profile);
     }
 }

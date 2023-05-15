@@ -48,6 +48,7 @@ namespace Native.API.Exceptions
         private static HttpStatusCode GetErrorCode(Exception e) => e switch
         {
             NotFoundException => HttpStatusCode.NotFound,
+            BadRequestException => HttpStatusCode.BadRequest,
             _ => HttpStatusCode.InternalServerError
         };
     }
