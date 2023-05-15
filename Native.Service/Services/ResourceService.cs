@@ -38,7 +38,7 @@ namespace Native.Service.Services
             throw new NotImplementedException();
         }
 
-        public async Task<U> GetByGuid<U>(Guid guid) where U : IDTOConvertible<T> => 
+        public async Task<U> GetByGuid<U>(Guid guid) where U : IDTOConvertible<T> =>
             _mapper.Map<U>(await _repositoryManager.GetRepoByResourceType<T>()
             .GetByGuidAsync(guid));
 

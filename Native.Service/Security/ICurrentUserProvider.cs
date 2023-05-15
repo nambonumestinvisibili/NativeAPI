@@ -12,6 +12,7 @@ namespace Native.Service.Security
     public interface ICurrentUserProvider
     {
         string GetUserGuid();
+        Task<Guid> GetUserProfileGuid();
         Task<User> GetUser();
     }
 }

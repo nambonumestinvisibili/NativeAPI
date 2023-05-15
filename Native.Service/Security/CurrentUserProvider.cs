@@ -37,5 +37,7 @@ namespace Native.Service.Security
                     == userGuidFromClaim) 
                 ?? throw new UserNotFoundException();
         }
+
+        public async Task<Guid> GetUserProfileGuid() => (await GetUser()).Profile.Guid;
     }
 }

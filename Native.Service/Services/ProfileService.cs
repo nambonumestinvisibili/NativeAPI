@@ -1,6 +1,8 @@
-﻿using Native.Domain.Models;
+﻿using Native.Domain.DataAccess;
+using Native.Domain.Models;
 using Native.Repositories;
 using Native.Service.DTOs;
+using Native.Service.Security;
 using Native.Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,21 @@ namespace Native.Service.Services
 {
     internal class ProfileService : ResourceService<Profile>, IProfileService
     {
-        public ProfileService(IRepositoryManager repositoryManager, AutoMapper.IMapper mapper) : base(repositoryManager, mapper)
+        private readonly ICurrentUserProvider _currentUserProvider;
+
+        public ProfileService(
+            IRepositoryManager repositoryManager, 
+            AutoMapper.IMapper mapper,
+            ICurrentUserProvider currentUserProvider) : base(repositoryManager, mapper)
         {
+            _currentUserProvider = currentUserProvider;
         }
 
-        public Task CreateNewProfile(ProfileDTO profileDTO)
+        public async Task<DetailedProfileDTO> GetCurrentUserProfile()
         {
-            return null;
+            var profileGuid = await _currentUserProvider.GetUserProfileGuid();
+            var profile = await _repositoryManager.Profile.GetDetailedProfile(profileGuid);
+            return _mapper.Map<DetailedProfileDTO>(profile);
         }
     }
 }

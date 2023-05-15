@@ -10,6 +10,6 @@ namespace Native.Service.Services.Interfaces
 {
     public interface IProfileService : IResourceService<Profile>
     {
-        Task CreateNewProfile(ProfileDTO profileDTO);
+        Task<DetailedProfileDTO> GetCurrentUserProfile();
     }
 }

@@ -5,5 +5,6 @@ namespace Native.Repositories.Repositories.Contracts
 {
     public interface IProfileRepository : IRepository<Profile>
     {
+        Task<Profile> GetDetailedProfile(Guid profileGuid);
     }
 }
