@@ -24,6 +24,12 @@ namespace Native.Domain.DataAccess
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            //todo: if env
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -43,7 +49,7 @@ namespace Native.Domain.DataAccess
         {
             builder.Properties<TimeOnly>()
                 .HaveConversion<TimeOnlyConverter>()
-                .HaveColumnType("date");
+                .HaveColumnType("time");
         }
         
         private static void SeedInterests(ModelBuilder modelBuilder)
@@ -117,14 +123,11 @@ namespace Native.Domain.DataAccess
 
     }
 
-    internal class TimeOnlyConverter : ValueConverter<TimeOnly, DateTime>
+    internal class TimeOnlyConverter : ValueConverter<TimeOnly, TimeSpan>
     {
-        public TimeOnlyConverter() : base(
-                d => DateTime.Today.Add(d.ToTimeSpan()),
-                d => TimeOnly.FromDateTime(d)
-            )
-        {
-
-        }
+        public TimeOnlyConverter() : base(timeOnly =>
+                timeOnly.ToTimeSpan(),
+            timeSpan => TimeOnly.FromTimeSpan(timeSpan))
+        { }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Native.Domain.DataAccess;
 
@@ -11,9 +12,11 @@ using Native.Domain.DataAccess;
 namespace Native.Domain.Migrations
 {
     [DbContext(typeof(NativeContext))]
-    partial class NativeContextModelSnapshot : ModelSnapshot
+    [Migration("20231016214933_dropTimeOnly")]
+    partial class dropTimeOnly
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,13 +99,13 @@ namespace Native.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a03a576d-406e-4294-ac87-f059b1d81624",
+                            Id = "9dbbcb5e-2777-4066-8f7d-bd93fc8d87c9",
                             Name = "user",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "834b343f-827b-4a12-a9b1-b92ebc514961",
+                            Id = "2b97ad0a-fa6f-4631-b3e2-4b6d3cb37ba5",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -253,9 +256,6 @@ namespace Native.Domain.Migrations
                     b.Property<decimal>("Charge")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<TimeSpan>("ClosingTime")
-                        .HasColumnType("time");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -266,9 +266,6 @@ namespace Native.Domain.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("OpeningTime")
-                        .HasColumnType("time");
 
                     b.Property<int>("OrganiserId")
                         .HasColumnType("int");
@@ -308,169 +305,169 @@ namespace Native.Domain.Migrations
                         new
                         {
                             Id = 1,
-                            Guid = new Guid("8b36b8a7-68e0-4144-897e-706bd2188374"),
+                            Guid = new Guid("11544dba-cd2c-4807-a7db-81f4b1454bbe"),
                             Name = "Coffe & chat"
                         },
                         new
                         {
                             Id = 2,
-                            Guid = new Guid("9d55aaa1-715d-4010-88df-5a2e0df25007"),
+                            Guid = new Guid("8238d63d-0da3-4f89-84c0-adcf5a3e88f3"),
                             Name = "Walk & talk"
                         },
                         new
                         {
                             Id = 3,
-                            Guid = new Guid("1e4e676f-525f-43bf-8ef3-d1b330c96562"),
+                            Guid = new Guid("5c182a3c-473f-4688-ad3a-08ddaad63639"),
                             Name = "Networking"
                         },
                         new
                         {
                             Id = 4,
-                            Guid = new Guid("6f13dd55-438d-4a6c-892b-2045ffda4540"),
+                            Guid = new Guid("2d2c4032-f651-4067-a368-9227b817101e"),
                             Name = "Cinema"
                         },
                         new
                         {
                             Id = 5,
-                            Guid = new Guid("3009faf9-20a6-4fc1-b38e-963065069135"),
+                            Guid = new Guid("202b71cf-06cf-4189-999e-c2f0c5807ca2"),
                             Name = "Theatre"
                         },
                         new
                         {
                             Id = 6,
-                            Guid = new Guid("9dd3f057-e9ae-4340-b6e4-a42eede8a5c1"),
+                            Guid = new Guid("14eef2eb-337f-4f57-8345-3063810e1e43"),
                             Name = "Gigs & concerts"
                         },
                         new
                         {
                             Id = 7,
-                            Guid = new Guid("d889f5cc-415e-4b99-b1fd-5403ff6c91ef"),
+                            Guid = new Guid("1d360c5c-83b9-40d3-a3b7-7d84f45c320b"),
                             Name = "Shopping"
                         },
                         new
                         {
                             Id = 8,
-                            Guid = new Guid("61414e9c-491d-4259-b325-2e0718d3f9f8"),
+                            Guid = new Guid("12ddc4d6-b45b-4a03-9724-373bf2ce9986"),
                             Name = "Bowling"
                         },
                         new
                         {
                             Id = 9,
-                            Guid = new Guid("5c434aea-054f-4cfd-b19c-2c3f41b64808"),
+                            Guid = new Guid("f42b5c21-fcd0-4fa3-9778-c67869edc9a0"),
                             Name = "Poker"
                         },
                         new
                         {
                             Id = 10,
-                            Guid = new Guid("9d5ea3de-b8c3-4363-97c0-5349174fca6e"),
+                            Guid = new Guid("792feb00-9595-406c-bc0e-e70de4871fda"),
                             Name = "Karting"
                         },
                         new
                         {
                             Id = 11,
-                            Guid = new Guid("11e74a6b-3231-4d4f-bdb8-c9b1ee3e88cf"),
+                            Guid = new Guid("bfe67ef5-7efc-4e75-9577-10ed3d055c60"),
                             Name = "Pub quiz"
                         },
                         new
                         {
                             Id = 12,
-                            Guid = new Guid("03f6e0c1-5a10-4fe0-8dfe-9a8e310675df"),
+                            Guid = new Guid("c181d0be-e210-4f64-a3bb-8f36ca9b60ba"),
                             Name = "Dancing"
                         },
                         new
                         {
                             Id = 13,
-                            Guid = new Guid("d2bda9b8-63ee-4366-b86e-7dd33fe5bf25"),
+                            Guid = new Guid("48c8861a-96f4-4747-8c4e-bfab87afeab1"),
                             Name = "Languages"
                         },
                         new
                         {
                             Id = 14,
-                            Guid = new Guid("70560b9c-e99d-4451-9c5d-7047b5779083"),
+                            Guid = new Guid("82066fec-5643-4fd3-af58-98a4d73bf419"),
                             Name = "Photography"
                         },
                         new
                         {
                             Id = 15,
-                            Guid = new Guid("67420291-213c-489d-b513-e938bcbeef9d"),
+                            Guid = new Guid("4eb24369-39ef-4a39-8260-80bb4bbdaa90"),
                             Name = "Baking"
                         },
                         new
                         {
                             Id = 16,
-                            Guid = new Guid("2b6031d3-7960-400a-ae14-d9bf63e5ba08"),
+                            Guid = new Guid("b2252d08-d95e-49c8-9d3c-38069e54ec41"),
                             Name = "Satrtups & enterpreneurship"
                         },
                         new
                         {
                             Id = 17,
-                            Guid = new Guid("044d6763-ef30-4f73-ba34-962ace807b98"),
+                            Guid = new Guid("6a84c3af-2927-410d-ab0a-921213e16d75"),
                             Name = "Hollistic wellness"
                         },
                         new
                         {
                             Id = 18,
-                            Guid = new Guid("1ae8e656-6097-44e7-ad45-a07013e7036c"),
+                            Guid = new Guid("33d79a40-ec43-4b29-bbc4-2fa3064406bc"),
                             Name = "Nutrition"
                         },
                         new
                         {
                             Id = 19,
-                            Guid = new Guid("3558d6ee-fbe6-4916-bca2-546151de151b"),
+                            Guid = new Guid("a430b3cd-69e6-44d1-a984-296035f00f92"),
                             Name = "Reading"
                         },
                         new
                         {
                             Id = 20,
-                            Guid = new Guid("a1ddef72-94f1-4a56-959d-42976150f1e3"),
+                            Guid = new Guid("a05503b7-86bc-4f48-aa12-6002aa7be414"),
                             Name = "Writing"
                         },
                         new
                         {
                             Id = 21,
-                            Guid = new Guid("c8927c07-f772-438e-bc81-174b27b65d37"),
+                            Guid = new Guid("30f4f279-23fa-4ace-a726-06af7de65942"),
                             Name = "Gardening"
                         },
                         new
                         {
                             Id = 22,
-                            Guid = new Guid("215ad8be-c2b9-48e2-87eb-fc7729ca04a9"),
+                            Guid = new Guid("04a87983-cb3a-4e97-8303-0de8023f6821"),
                             Name = "Neighbourhood "
                         },
                         new
                         {
                             Id = 23,
-                            Guid = new Guid("d7e2f9f9-fd94-4f3e-9114-806850951820"),
+                            Guid = new Guid("4474796b-58ed-4b40-82c4-7d98ebd92ff7"),
                             Name = "Hiking"
                         },
                         new
                         {
                             Id = 24,
-                            Guid = new Guid("9ca04a05-70ea-476b-9d68-367cc8b3ddce"),
+                            Guid = new Guid("0744bf1c-ca79-463b-8d97-99546f305cc3"),
                             Name = "Picnic"
                         },
                         new
                         {
                             Id = 25,
-                            Guid = new Guid("dca131f5-b303-41f5-9cd7-fc6b8fbb6da5"),
+                            Guid = new Guid("921b410f-00e8-400a-905f-17f847db3276"),
                             Name = "Dog walking"
                         },
                         new
                         {
                             Id = 26,
-                            Guid = new Guid("c079e38c-5d84-489c-a60d-416baead172a"),
+                            Guid = new Guid("1a132385-a2a3-4257-9950-7919455faa0a"),
                             Name = "Outdoor activities"
                         },
                         new
                         {
                             Id = 27,
-                            Guid = new Guid("7706c5e7-15b9-4f9f-a437-5af6558c934a"),
+                            Guid = new Guid("c119e1aa-9298-4b04-acdf-56f19ea48913"),
                             Name = "Traveling abroad"
                         },
                         new
                         {
                             Id = 28,
-                            Guid = new Guid("a0b8fd11-a255-43b1-9e01-f26772641e0e"),
+                            Guid = new Guid("e291a461-5cea-43e4-8b65-aea051f277d0"),
                             Name = "Camping"
                         });
                 });
@@ -674,9 +671,6 @@ namespace Native.Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<TimeSpan>("ClosingTime")
-                        .HasColumnType("time");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -687,9 +681,6 @@ namespace Native.Domain.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("OpeningTime")
-                        .HasColumnType("time");
 
                     b.HasKey("Id");
 

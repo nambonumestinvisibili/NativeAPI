@@ -1,11 +1,5 @@
 ﻿using Native.Domain.Models;
 using Native.Service.Services.Interfaces;
-using Native.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Native.Repositories;
 using AutoMapper;
 using Native.Service.DTOs;
