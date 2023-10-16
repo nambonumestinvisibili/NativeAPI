@@ -22,7 +22,6 @@ namespace Native.Domain.DataAccess
         public NativeContext(DbContextOptions options)
             : base(options) 
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

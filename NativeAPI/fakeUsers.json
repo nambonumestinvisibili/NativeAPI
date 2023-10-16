@@ -1,0 +1,7 @@
+[
+  {
+    "email": "dawid.holewa@gmail.com",
+    "password": "Retikulum99!"
+  }
+]
+// docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Nativeadmin123!" -p 1433:1433 --name native_db_c -v native_database:/var/opt/mssql -d mcr.microsoft.com/mssql/server

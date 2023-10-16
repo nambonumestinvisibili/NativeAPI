@@ -34,7 +34,7 @@ namespace Native.API.Controllers
 
         [HttpGet("{guid}")]
         public async Task<VenueDTO> GetVenue(Guid guid) =>
-            await _venueService.GetByGuid<VenueDTO>(guid);
+            await _venueService.GetDetailedVenue(guid);
 
         [HttpPost]
         public async Task<IActionResult> CreateVenue(CreateVenueRequest request)

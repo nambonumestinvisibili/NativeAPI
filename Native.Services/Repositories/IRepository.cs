@@ -13,6 +13,7 @@ namespace Native.Service.Repositories
     {
         Task<T> GetByGuidAsync(Guid guid);
         Task<T> GetByIdAsync(int id);
+        Task<T> GetByGuidWithIncludesAsync(Guid guid, params Expression<Func<T, object>>[] includes);
         Task<IEnumerable<T>> GetAllOfGuids(ICollection<Guid> guids);
         IQueryable<T> FindAll(bool trackChanges);
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);

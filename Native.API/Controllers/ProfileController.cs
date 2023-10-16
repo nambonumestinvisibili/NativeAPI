@@ -20,7 +20,6 @@ namespace Native.API.Controllers
             _profileService = profileService;
         }
 
-        //get my own profile - we need a check!
         [HttpGet("{guid}")]
         public async Task<IActionResult> GetOtherUserProfile(Guid guid) =>
             Ok(await _profileService.GetByGuid<ProfileDTO>(guid));
@@ -28,13 +27,5 @@ namespace Native.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCurrentUserProfile() =>
             Ok(await _profileService.GetCurrentUserProfile());
-
-        //[HttpPost]
-        //public async Task<IActionResult> CreateProfile(CreateProfileRequest request)
-        //{
-        //    var profileDTO = _mapper.Map<ProfileDTO>(request);
-        //    await _profileService.CreateNewProfile(profileDTO);
-        //    return StatusCode(StatusCodes.Status201Created);
-        //}
     }
 }

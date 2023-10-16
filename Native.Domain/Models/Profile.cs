@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Native.Domain.Models.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Native.Domain.Models
 {
-    public class Profile : Entity
+    public class Profile : Entity, IInterestPossessor
     {
         public string? FirstName { get; set; }
         public string? SecondName { get; set; }

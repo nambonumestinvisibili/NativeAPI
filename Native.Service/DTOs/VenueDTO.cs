@@ -10,6 +10,7 @@ namespace Native.Service.DTOs
 {
     public record VenueDTO : IDTOConvertible<Venue>
     {
+        public Guid Guid { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public TimeOnly OpeningTime { get; set; }

@@ -48,7 +48,7 @@ namespace Native.Service.Services
 
         public async Task<IEnumerable<U>> GetAllAsync<U>() where U : IDTOConvertible<T> =>
             _mapper.Map<IEnumerable<U>>(await GetAllRawAsync());
-
+        
         private async Task<IEnumerable<T>> GetAllRawAsync() =>
             await _repositoryManager.GetRepoByResourceType<T>()
                 .FindAll(trackChanges: false)

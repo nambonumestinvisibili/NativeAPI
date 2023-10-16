@@ -67,9 +67,32 @@ namespace Native.Repositories.Repositories
             return Enumerable.Empty<T>();
         }
 
+        public async Task<T> GetByGuidWithIncludesAsync(Guid guid, params Expression<Func<T, object>>[] includes)
+        {
+            T? result = await NativeContext.Set<T>()
+                .IncludeMultiple(includes)
+                .SingleOrDefaultAsync(item => item.Guid == guid);
+            ExceptionExtensions.ThrowNotFoundIfNull<T>(result, guid);
+            return result!;
+        }
+
         public void Create(T entity) => NativeContext.Set<T>().Add(entity);
         public void Update(T entity) => NativeContext.Set<T>().Update(entity);
         public void Delete(T entity) => NativeContext.Set<T>().Remove(entity);
+    }
 
+    public static class RepositoryExtensions
+    {
+        public static IQueryable<T> IncludeMultiple<T>(this IQueryable<T> query, params Expression<Func<T, object>>[] includes) 
+            where T : class
+        {
+            if (includes != null)
+            {
+                query = includes.Aggregate(query,
+                          (current, include) => current.Include(include));
+            }
+
+            return query;
+        }
     }
 }
