@@ -15,5 +15,15 @@ namespace Native.Repositories.Repositories.Implementations
     {
         public VenueRepository(NativeContext nativeContext) : base(nativeContext) { }
 
+        public async Task<Venue> GetDetailedVenue(Guid guid)
+        {
+            return await NativeContext.Venues
+                .Include(ve => ve.Interests)
+                .Include(ve => ve.ProfilesThatVisitedVenue)
+                    .ThenInclude(pr => pr.Profile)
+                        .ThenInclude(prof => prof.CitiesThatTheProfileVisited)
+                .GetByGuidAsync(guid);
+        }
+
     }
 }

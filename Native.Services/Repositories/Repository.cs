@@ -37,10 +37,10 @@ namespace Native.Repositories.Repositories
 
         public async Task<T> GetByGuidAsync(Guid guid)
         {
-            T? result = await NativeContext.Set<T>().SingleOrDefaultAsync(item => item.Guid == guid);
-            ExceptionExtensions.ThrowNotFoundIfNull<T>(result, guid);
-            return result!;
+            return await NativeContext.Set<T>()
+                .GetByGuidAsync(guid);
         }
+
 
         public async Task<T> GetByIdAsync(int id)
         {
@@ -93,6 +93,13 @@ namespace Native.Repositories.Repositories
             }
 
             return query;
+        }
+
+        public static async Task<T> GetByGuidAsync<T>(this IQueryable<T> query,  Guid guid) where T : Entity
+        {
+            var result = await query.SingleOrDefaultAsync(item => item.Guid == guid);
+            ExceptionExtensions.ThrowNotFoundIfNull<T>(result, guid);
+            return result!;
         }
     }
 }

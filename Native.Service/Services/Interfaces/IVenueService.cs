@@ -12,6 +12,8 @@ namespace Native.Service.Services.Interfaces
     {
         Task CreateNewVenue(Venue venue, IEnumerable<Guid> interestGuids);
 
-        Task<VenueDTO> GetDetailedVenue(Guid guid);
+        Task<DetailedVenueDTO> GetDetailedVenue(Guid guid);
+
+        Task AddProfileToVenueVisitors(Guid venueGuid, bool hasProfileUpvotes, bool hasProfileDownVoted);
     }
 }

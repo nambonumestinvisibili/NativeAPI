@@ -33,7 +33,7 @@ namespace Native.API.Controllers
             await _venueService.GetAllAsync<VenueDTO>();
 
         [HttpGet("{guid}")]
-        public async Task<VenueDTO> GetVenue(Guid guid) =>
+        public async Task<DetailedVenueDTO> GetVenue(Guid guid) =>
             await _venueService.GetDetailedVenue(guid);
 
         [HttpPost]
@@ -43,5 +43,16 @@ namespace Native.API.Controllers
             await _venueService.CreateNewVenue(venue, request.InterestGuids);
             return StatusCode(StatusCodes.Status201Created);
         }
+
+        [HttpPost("{guid}/visit")]
+        public async Task<IActionResult> AddProfileToVenueVistors(AddProfileToVenueRequest request)
+        {
+            await _venueService.AddProfileToVenueVisitors(
+                request.VenueGuid, 
+                request.HasProfileUpvoted, 
+                request.HasProfileDownvoted);
+            return StatusCode(StatusCodes.Status200OK);
+        }
+            
     }
 }

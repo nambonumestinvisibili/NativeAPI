@@ -19,4 +19,10 @@ namespace Native.Services.Requests
     {
         
     }
+
+    public record AddProfileToVenueRequest(
+        [Required] Guid VenueGuid,
+        bool HasProfileUpvoted,
+        bool HasProfileDownvoted
+        );
 }

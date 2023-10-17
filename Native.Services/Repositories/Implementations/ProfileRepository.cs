@@ -12,8 +12,32 @@ namespace Native.Repositories.Repositories.Implementations
         }
 
         public async Task<Profile> GetDetailedProfile(Guid profileGuid) => 
-            await NativeContext.Profiles.Include(assoc => assoc.Interests)
-            .FirstOrDefaultAsync(profile => profile.Guid == profileGuid);
-        
+            await NativeContext.Profiles
+                .Include(assoc => assoc.Interests)
+            .GetByGuidAsync(profileGuid);
+
+        public async Task GetVotes(int venueId)
+        {
+            var profileVenueTableWithSpecificVenueQuery = NativeContext.ProfileVenues
+                .Include(pv => pv.Profile)
+                    .ThenInclude(pr => pr.CitiesThatTheProfileVisited)
+                .Where(profileVenue => profileVenue.VenueId == venueId);
+
+            var count = profileVenueTableWithSpecificVenueQuery
+                .GroupBy(
+                    profileVenue => profileVenue.Profile.CitiesThatTheProfileVisited.Any(city => city.IsProfileNativeToTheCity),
+                    (isNative, profileVenues) => new
+                    {
+                        IsNative = isNative,
+                        ProfileUpvotesCount = profileVenues.Sum(pv => pv.ProfileUpvoted ? 1 : 0),
+                        ProfileDownVotesCount = profileVenues.Sum(pv => pv.ProfileDownvoted ? 1 : 0)
+                    }
+                );
+
+            //var nativeVotes = count.Where(x => x.IsNative);
+            //var touristVotes = count.Where(x => !x.IsNative);
+
+        }
+
     }
 }

@@ -10,5 +10,6 @@ namespace Native.Repositories.Repositories.Contracts
 {
     public interface IVenueRepository : IRepository<Venue>
     {
+        Task<Venue> GetDetailedVenue(Guid guid);
     }
 }
