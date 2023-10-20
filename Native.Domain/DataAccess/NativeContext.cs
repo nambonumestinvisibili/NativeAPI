@@ -116,6 +116,7 @@ namespace Native.Domain.DataAccess
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Location> Residences { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<Location> Locations { get; set; }
         public DbSet<ProfileEvent> ProfileEvents { get; set; }
         public DbSet<ProfileVenue> ProfileVenues { get; set; }
         public DbSet<ProfileCity> ProfileCity { get; set; }

@@ -21,5 +21,11 @@ namespace Native.API.Controllers
         [HttpGet("{guid}")]
         public async Task<IActionResult> GetResidence(Guid guid) =>
             Ok(await _residenceService.GetByGuid<LocationDTO>(guid));
+
+        [HttpGet("assign")]
+        public async Task<IActionResult> GetAddressByLongitudeAndLatitude([FromQuery] double longitude, [FromQuery] double latitude)
+        {
+            return Ok(await _residenceService.AssignNativeAddressToPersonBasedOn(longitude, latitude, isLocationNative: true));
+        }
     }
 }

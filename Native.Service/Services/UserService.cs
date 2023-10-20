@@ -104,7 +104,7 @@ namespace Native.Service.Services
 
         public async Task Logout()
         {
-            User user = await _currentUserProvider.GetUser();
+            User user = await _currentUserProvider.GetUserWithProfile();
 
             await InvalidateToken(user);
         }
@@ -132,7 +132,7 @@ namespace Native.Service.Services
 
         public async Task RegisterBasicInfo(BasicInfoRegistrationRequest request)
         {
-            var user = await _currentUserProvider.GetUser();
+            var user = await _currentUserProvider.GetUserWithProfile();
             user.Profile.FirstName = request.Firstname;
             user.Profile.SecondName = request.Secondname;
             user.Profile.BirthDayDate = request.Birthday;
@@ -142,7 +142,7 @@ namespace Native.Service.Services
 
         public async Task RegisterBioAndIntro(DescriptionRegistrationRequest request)
         {
-            var user = await _currentUserProvider.GetUser();
+            var user = await _currentUserProvider.GetUserWithProfile();
             
             //todo: check if bad words... etc.
 
@@ -159,7 +159,7 @@ namespace Native.Service.Services
                 throw new BadRequestException("There should be 3 or more interests.");
             }
 
-            var user = await _currentUserProvider.GetUser();
+            var user = await _currentUserProvider.GetUserWithProfile();
 
             await _repositoryManager.Interest.AddInterestsToUser(interestGuids, user.Profile);
         }

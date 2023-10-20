@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Native.Domain.Models;
 using Native.Repositories;
-using Native.Service.Services.Interfaces;
 
-namespace Native.Service.Services
+namespace Native.Service.Services.Cities
 {
     internal class CityService : ResourceService<City>, ICityService
     {

@@ -41,7 +41,6 @@ namespace Native.Repositories.Repositories
                 .GetByGuidAsync(guid);
         }
 
-
         public async Task<T> GetByIdAsync(int id)
         {
             T? result = await NativeContext.Set<T>().SingleOrDefaultAsync(item => item.Id == id);
@@ -77,6 +76,19 @@ namespace Native.Repositories.Repositories
         }
 
         public void Create(T entity) => NativeContext.Set<T>().Add(entity);
+
+        public async Task<T> CreateIfDoesntExist(T entity)
+        {
+            var entityFromDb = await NativeContext.Set<T>().FirstOrDefaultAsync(e => e.Id == entity.Id);
+            if (entityFromDb == null)
+            {
+                NativeContext.Set<T>().Add(entity);
+                await NativeContext.SaveChangesAsync();
+                return entity;
+            }
+            return entityFromDb;
+        }
+
         public void Update(T entity) => NativeContext.Set<T>().Update(entity);
         public void Delete(T entity) => NativeContext.Set<T>().Remove(entity);
     }

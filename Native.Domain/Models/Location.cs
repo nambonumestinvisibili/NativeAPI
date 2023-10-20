@@ -8,6 +8,7 @@ namespace Native.Domain.Models
 {
     public class Location : Entity
     {
-        public string Name { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
     }
 }

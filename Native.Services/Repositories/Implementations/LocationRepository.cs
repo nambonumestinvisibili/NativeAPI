@@ -9,5 +9,24 @@ namespace Native.Repositories.Repositories.Implementations
         public LocationRepository(NativeContext context) : base(context)
         {
         }
+
+        public async Task<Location> GetIfExistsOrAdd(double longitude, double latitude)
+        {
+            Location? location = NativeContext.Locations.SingleOrDefault(x => x.Longitude == longitude && x.Latitude == latitude);
+
+            if (location == null)
+            {
+                Location newLocation = new Location
+                {
+                    Longitude = longitude,
+                    Latitude = latitude,
+                };
+
+                NativeContext.Locations.Add(newLocation);
+                await NativeContext.SaveChangesAsync();
+                return newLocation;
+            }
+            return location;
+        }
     }
 }

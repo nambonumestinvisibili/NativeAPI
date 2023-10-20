@@ -17,6 +17,7 @@ namespace Native.Service.Repositories
         Task<IEnumerable<T>> GetAllOfGuids(ICollection<Guid> guids);
         IQueryable<T> FindAll(bool trackChanges);
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
+        Task<T> CreateIfDoesntExist(T entity);
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);

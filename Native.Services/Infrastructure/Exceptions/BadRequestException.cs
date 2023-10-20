@@ -14,4 +14,13 @@ namespace Native.Repositories.Infrastructure.Exceptions
             : base(string.Join("\n", validationErrors)) { }
 
     }
+
+    public class ConflictException : Exception
+    {
+        public ConflictException(string message) : base(message) { }
+
+        public ConflictException(string[] validationErrors)
+            : base(string.Join("\n", validationErrors)) { }
+
+    }
 }

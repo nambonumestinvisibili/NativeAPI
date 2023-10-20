@@ -28,7 +28,7 @@ namespace Native.Service.Security
                 .First(claims => claims.Type == ClaimTypes.NameIdentifier).Value;
         }
 
-        public async Task<User> GetUser()
+        public async Task<User> GetUserWithProfile()
         {
             var claims = _context.HttpContext.User.Claims.ToList();  
             var userGuidFromClaim = claims.First(claims => claims.Type == ClaimTypes.NameIdentifier).Value;
@@ -38,6 +38,6 @@ namespace Native.Service.Security
                 ?? throw new UserNotFoundException();
         }
 
-        public async Task<Guid> GetUserProfileGuid() => (await GetUser()).Profile.Guid;
+        public async Task<Guid> GetUserProfileGuid() => (await GetUserWithProfile()).Profile.Guid;
     }
 }

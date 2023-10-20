@@ -9,7 +9,6 @@ namespace Native.Domain.Models
 {
     public class City : Entity
     {
-        public Location Location { get; set; }
         public string CountryIsoCode { get; set; }
         public string CityName { get; set; }
         public string PostalCode { get; set; }
@@ -24,13 +23,8 @@ namespace Native.Domain.Models
             else
             {
                 City c = (City)obj;
-                return (CountryIsoCode == c.CountryIsoCode) && (PostalCode == c.PostalCode);
+                return (CountryIsoCode == c.CountryIsoCode) && (PostalCode == c.PostalCode) && CityName == c.CityName;
             }
-        }
-
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
         }
     }
 }

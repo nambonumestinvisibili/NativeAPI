@@ -18,6 +18,7 @@ namespace Native.Repositories
         IEventRepository Event { get; }
         IProfileRepository Profile { get; }
         ILocationRepository Location { get; }
+        ICityRepository City { get; }
         Task Save();
     }
 }

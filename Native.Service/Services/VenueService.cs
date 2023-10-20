@@ -4,6 +4,7 @@ using Native.Repositories;
 using AutoMapper;
 using Native.Service.DTOs;
 using Native.Service.Security;
+using Native.Service.Exceptions;
 
 namespace Native.Service.Services
 {

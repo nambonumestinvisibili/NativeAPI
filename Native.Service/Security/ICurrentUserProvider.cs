@@ -13,6 +13,6 @@ namespace Native.Service.Security
     {
         string GetUserGuid();
         Task<Guid> GetUserProfileGuid();
-        Task<User> GetUser();
+        Task<User> GetUserWithProfile();
     }
 }

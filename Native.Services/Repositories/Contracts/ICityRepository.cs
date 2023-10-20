@@ -1,4 +1,5 @@
-﻿using Native.Domain.Models;
+﻿using Native.Domain.DataAccess;
+using Native.Domain.Models;
 using Native.Service.Repositories;
 using System;
 using System.Collections.Generic;
