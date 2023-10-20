@@ -19,6 +19,8 @@ namespace Native.API.Mappings
             CreateMap<CreateVenueRequest, Venue>()
                 .ForMember(s => s.OpeningTime, opt => opt.ConvertUsing(new TimeOfTheDayConverter()))
                 .ForMember(s => s.ClosingTime, opt => opt.ConvertUsing(new TimeOfTheDayConverter()))
+                .ForPath(s => s.Location.Latitude, opt => opt.MapFrom(src => src.Latitude))
+                .ForPath(s => s.Location.Longitude, opt => opt.MapFrom(src => src.Longitude))
                 .ForSourceMember(s => s.InterestGuids, opt => opt.DoNotValidate())
                 .ReverseMap();
 

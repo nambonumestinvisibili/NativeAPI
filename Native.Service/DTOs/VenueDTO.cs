@@ -16,5 +16,6 @@ namespace Native.Service.DTOs
         public TimeOnly OpeningTime { get; set; }
         public TimeOnly ClosingTime { get; set; }
         public ICollection<InterestDTO> Interests { get; set; }
+        public LocationDTO Location { get; set; }
     }
 }

@@ -15,6 +15,18 @@ namespace Native.Repositories.Repositories.Implementations
     {
         public VenueRepository(NativeContext nativeContext) : base(nativeContext) { }
 
+        public async Task<IEnumerable<Venue>> GetByLocation(double longitudeLeft, double longitudeRight, double latitudeTop, double latitudeDown)
+        {
+            return await NativeContext.Venues
+                    .Include(ve => ve.Location)
+                    .Include(ve => ve.Interests)
+                .Where(ve => ve.Location.Latitude <= latitudeDown 
+                    && latitudeTop <= ve.Location.Latitude
+                    && longitudeLeft <= ve.Location.Longitude
+                    && ve.Location.Longitude <= longitudeRight)
+                .ToListAsync();
+        }
+
         public async Task<Venue> GetDetailedVenue(Guid guid)
         {
             return await NativeContext.Venues

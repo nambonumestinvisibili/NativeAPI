@@ -16,7 +16,7 @@ namespace Native.Repositories.Repositories.Implementations
 
             if (location == null)
             {
-                Location newLocation = new Location
+                Location newLocation = new()
                 {
                     Longitude = longitude,
                     Latitude = latitude,

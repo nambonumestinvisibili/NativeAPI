@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Native.API.Requests;
 using Native.Domain.Models;
 using Native.Service.DTOs;
+using Native.Service.DTOs.Request;
 using Native.Service.Services.Interfaces;
 using Native.Services.Requests;
 using System;
@@ -31,6 +33,10 @@ namespace Native.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<VenueDTO>> GetAll() =>
             await _venueService.GetAllAsync<VenueDTO>();
+
+        [HttpPost("bylocation")]
+        public async Task<IEnumerable<VenueDTO>> GetVenuesByLocation(AreaDTO area) =>
+            await _venueService.GetVenuesByLocation(area);
 
         [HttpGet("{guid}")]
         public async Task<DetailedVenueDTO> GetVenue(Guid guid) =>

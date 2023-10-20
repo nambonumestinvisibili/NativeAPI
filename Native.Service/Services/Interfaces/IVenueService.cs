@@ -1,5 +1,6 @@
 ﻿using Native.Domain.Models;
 using Native.Service.DTOs;
+using Native.Service.DTOs.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,6 @@ namespace Native.Service.Services.Interfaces
         Task<DetailedVenueDTO> GetDetailedVenue(Guid guid);
 
         Task AddProfileToVenueVisitors(Guid venueGuid, bool hasProfileUpvotes, bool hasProfileDownVoted);
+        Task<IEnumerable<VenueDTO>> GetVenuesByLocation(AreaDTO req);
     }
 }

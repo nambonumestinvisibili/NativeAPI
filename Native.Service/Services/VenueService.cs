@@ -5,6 +5,8 @@ using AutoMapper;
 using Native.Service.DTOs;
 using Native.Service.Security;
 using Native.Service.Exceptions;
+using Native.Service.DTOs.Request;
+using LanguageExt;
 
 namespace Native.Service.Services
 {
@@ -63,5 +65,17 @@ namespace Native.Service.Services
         }
 
         private bool HasProfileBothUpAndDownVoted(bool upvoted, bool downvoted) => upvoted && downvoted;
+
+        public async Task<IEnumerable<VenueDTO>> GetVenuesByLocation(AreaDTO req)
+        {
+            double latitudeLeft = req.Latitude - req.DeltaLatitude;
+            double latitudeRight = req.Latitude + req.DeltaLatitude;
+            double longitudeLeft = req.Longitude - req.DeltaLongitude;
+            double longitudeRight = req.Longitude + req.DeltaLongitude;
+
+            return (await _repositoryManager.Venue
+                .GetByLocation(longitudeLeft, longitudeRight, latitudeLeft, latitudeRight))
+                .Select(_mapper.Map<VenueDTO>);
+        }
     }
 }

@@ -14,7 +14,9 @@ namespace Native.Services.Requests
         [Required] string Description,
         [Required] TimeOfTheDay OpeningTime,
         [Required] TimeOfTheDay ClosingTime,
-        [Required] [MinLength(3)] ICollection<Guid> InterestGuids
+        [Required] [MinLength(3)] ICollection<Guid> InterestGuids,
+        [Required] double Longitude,
+        [Required] double Latitude
         );
 
     public record AddProfileToVenueRequest(
