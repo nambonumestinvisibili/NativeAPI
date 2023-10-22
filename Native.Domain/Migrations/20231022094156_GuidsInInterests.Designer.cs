@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Native.Domain.DataAccess;
 
@@ -11,9 +12,11 @@ using Native.Domain.DataAccess;
 namespace Native.Domain.Migrations
 {
     [DbContext(typeof(NativeContext))]
-    partial class NativeContextModelSnapshot : ModelSnapshot
+    [Migration("20231022094156_GuidsInInterests")]
+    partial class GuidsInInterests
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,13 +99,13 @@ namespace Native.Domain.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bcaa758b-b727-498c-ae0b-fcd9b4d7a338",
+                            Id = "247cd59a-9b73-420f-ae14-6489f86e6c6b",
                             Name = "user",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "f2159593-0e72-4ced-b42f-f1b69d6b602b",
+                            Id = "8001ef4f-60fb-4e6c-a093-66cd95e49254",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -216,28 +219,23 @@ namespace Native.Domain.Migrations
 
             modelBuilder.Entity("Native.Domain.Models.City", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("CountryIsoCode")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CountryIsoCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CountryIsoCode", "PostalCode");
 
                     b.ToTable("Cities");
                 });
@@ -536,12 +534,20 @@ namespace Native.Domain.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CityCountryIsoCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CityPostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("IsProfileNativeToTheCity")
                         .HasColumnType("bit");
 
                     b.HasKey("ProfileId", "CityId");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("CityCountryIsoCode", "CityPostalCode");
 
                     b.ToTable("ProfileCity");
                 });
@@ -668,6 +674,12 @@ namespace Native.Domain.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CityCountryIsoCode")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CityPostalCode")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<TimeSpan>("ClosingTime")
                         .HasColumnType("time");
 
@@ -691,6 +703,8 @@ namespace Native.Domain.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("LocationId");
+
+                    b.HasIndex("CityCountryIsoCode", "CityPostalCode");
 
                     b.ToTable("Venues");
                 });
@@ -812,15 +826,15 @@ namespace Native.Domain.Migrations
 
             modelBuilder.Entity("Native.Domain.Models.ProfileCity", b =>
                 {
-                    b.HasOne("Native.Domain.Models.City", "City")
-                        .WithMany("ProfilesWhichVisitedTheCity")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("Native.Domain.Models.Profile", "Profile")
                         .WithMany("CitiesThatTheProfileVisited")
                         .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Native.Domain.Models.City", "City")
+                        .WithMany("ProfilesWhichVisitedTheCity")
+                        .HasForeignKey("CityCountryIsoCode", "CityPostalCode")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -893,6 +907,12 @@ namespace Native.Domain.Migrations
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Native.Domain.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityCountryIsoCode", "CityPostalCode");
+
+                    b.Navigation("City");
 
                     b.Navigation("Location");
                 });

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Native.Service.DTOs
 {
-    public record LocationDTO : IDTOConvertible<Location>
-    {
-    }
+    public record LocationDTO(
+            double Longitude,
+            double Latitude
+        ) : IDTOConvertible<Location>;
 }

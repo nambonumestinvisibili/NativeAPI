@@ -14,7 +14,8 @@ namespace Native.Service.DTOs
         {
             CreateMap<Interest, InterestDTO>().ReverseMap();
             CreateMap<Venue, VenueDTO>().ReverseMap();
-            CreateMap<City, CityDTO>().ReverseMap();
+            CreateMap<City, CityDTO>()
+                .ReverseMap();
             CreateMap<Event, EventDTO>().ReverseMap();
             CreateMap<Domain.Models.Profile, DetailedProfileDTO>()
                 .ForMember(dto => dto.IsProfileRegistrationCompleted, 

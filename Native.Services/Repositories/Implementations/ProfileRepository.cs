@@ -46,7 +46,9 @@ namespace Native.Repositories.Repositories.Implementations
                     .ThenInclude(pr => pr.CitiesThatTheProfileVisited)
                 .Where(profileVenue => profileVenue.VenueId == venueId);
 
-            var count = profileVenueTableWithSpecificVenueQuery
+            // needs to have cities... if city == null 
+
+            var count = await profileVenueTableWithSpecificVenueQuery
                 .GroupBy(
                     profileVenue => profileVenue.Profile.CitiesThatTheProfileVisited.Any(city => city.IsProfileNativeToTheCity),
                     (isNative, profileVenues) => new
@@ -55,7 +57,7 @@ namespace Native.Repositories.Repositories.Implementations
                         ProfileUpvotesCount = profileVenues.Sum(pv => pv.ProfileUpvoted ? 1 : 0),
                         ProfileDownVotesCount = profileVenues.Sum(pv => pv.ProfileDownvoted ? 1 : 0)
                     }
-                );
+                ).ToDictionaryAsync(x => x.IsNative);
 
             //var nativeVotes = count.Where(x => x.IsNative);
             //var touristVotes = count.Where(x => !x.IsNative);

@@ -42,7 +42,7 @@ namespace Native.Domain.DataAccess
             ConfigureProfileVenueManyToManyRelationship(modelBuilder);
             ConfigureProfileCityManyToManyRelationship(modelBuilder);
 
-            modelBuilder.Entity<City>().HasKey(city => new { city.CountryIsoCode, city.PostalCode });
+            //modelBuilder.Entity<City>().HasKey(city => new { city.CountryIsoCode, city.PostalCode });
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder builder)
@@ -63,7 +63,7 @@ namespace Native.Domain.DataAccess
 
             var interests = csvReader.GetRecords<InterestSeed>()
                 .ToImmutableList()
-                .Select((seedInterest) => new Interest() { Id = seedInterest.Id, Name = seedInterest.Name });
+                .Select((seedInterest) => new Interest() { Id = seedInterest.Id, Guid = seedInterest.Guid, Name = seedInterest.Name });
 
             modelBuilder.Entity<Interest>().HasData(interests);
         }

@@ -1,29 +1,29 @@
-﻿Id,Category,Name
-1,SOCIALISING,Coffe & chat
-2,SOCIALISING,Walk & talk
-3,SOCIALISING,Networking
-4,SOCIALISING,Cinema
-5,SOCIALISING,Theatre
-6,SOCIALISING,Gigs & concerts
-7,SOCIALISING,Shopping
-8,SOCIALISING,Bowling
-9,SOCIALISING,Poker
-10,SOCIALISING,Karting
-11,SOCIALISING,Pub quiz
-12,HOBBY,Dancing
-13,HOBBY,Languages
-14,HOBBY,Photography
-15,HOBBY,Baking
-16,HOBBY,Satrtups & enterpreneurship
-17,HOBBY,Hollistic wellness
-18,HOBBY,Nutrition
-19,HOBBY,Reading
-20,HOBBY,Writing
-21,HOBBY,Gardening
-22,DISCOVERY,Neighbourhood 
-23,DISCOVERY,Hiking
-24,DISCOVERY,Picnic
-25,DISCOVERY,Dog walking
-26,DISCOVERY,Outdoor activities
-27,DISCOVERY,Traveling abroad
-28,DISCOVERY,Camping
+﻿Id,Category,Name,Guid
+1,SOCIALISING,Coffe & chat,b13f7d6e-2435-472b-969e-47b1bbb58b0d
+2,SOCIALISING,Walk & talk,40c64612-66de-4fd9-bccb-e86ddd2ef877
+3,SOCIALISING,Networking,f0693396-cadb-4d59-a604-a531ba21cb81
+4,SOCIALISING,Cinema,0159b701-86b9-4751-88d1-2591e9a57d3b
+5,SOCIALISING,Theatre,6b19d517-4057-451f-b4ff-1af0d1049e59
+6,SOCIALISING,Gigs & concerts,929e5d14-0d89-4019-9f2e-d7ebf637de71
+7,SOCIALISING,Shopping,ff649278-5cd8-49ef-98d4-569bc3e822c9
+8,SOCIALISING,Bowling,a0f08a2b-2988-4f40-910e-dfe483925eff
+9,SOCIALISING,Poker,e88596d6-0412-425f-9057-e36020caa266
+10,SOCIALISING,Karting,28417611-1a60-4216-8f60-b5eee5c3bd9e
+11,SOCIALISING,Pub quiz,65e8959b-7c79-46ba-8df8-64d3ac6cf659
+12,HOBBY,Dancing,f0f303b9-9658-4649-a648-8f2472c6244c
+13,HOBBY,Languages,3a3c0284-0eef-4dbc-b098-3eeb8aa9ec2d
+14,HOBBY,Photography,38a5f1c9-fad7-4db4-b3ef-8d729c2d201b
+15,HOBBY,Baking,341aebbb-78ed-4b17-a494-955178f50e6b
+16,HOBBY,Satrtups & enterpreneurship,33e6a11e-e2e7-4e02-80e9-ff89d683404e
+17,HOBBY,Hollistic wellness,946da87f-b016-44f1-84ea-b0a3ee9308c4
+18,HOBBY,Nutrition,c2ea845d-410a-44a1-9194-dd3686faa189
+19,HOBBY,Reading,d8b1cc1a-c3de-40ee-a98e-098c355b7b0b
+20,HOBBY,Writing,058732ca-6034-4798-8085-315441c48d7e
+21,HOBBY,Gardening,dec8ecec-5052-4eb0-ab73-d3be45c8ffe5
+22,DISCOVERY,Neighbourhood,c3dd2a51-ccf3-44bd-afd4-146c62b433a2
+23,DISCOVERY,Hiking,72b5275f-1df8-4dad-a143-c579f9efce1d
+24,DISCOVERY,Picnic,93d772b0-5896-420c-b252-8555dbc8af97
+25,DISCOVERY,Dog walking,179609c7-91f8-466f-9bd6-cf0890039817
+26,DISCOVERY,Outdoor activities,7e57df2b-57d3-4861-bde8-62a23240fa48
+27,DISCOVERY,Traveling abroad,efd19caf-5528-454b-99b2-cc9773a00340
+28,DISCOVERY,Camping,f71ab1ab-4d2b-4d6e-924e-40c493c6a8d8
