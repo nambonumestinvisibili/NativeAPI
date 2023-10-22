@@ -10,5 +10,6 @@ namespace Native.Domain.Models
     {
         public double Longitude { get; set; }
         public double Latitude { get; set; }
+        public City City { get; set; }
     }
 }

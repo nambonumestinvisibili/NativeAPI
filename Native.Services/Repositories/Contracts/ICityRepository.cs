@@ -11,5 +11,7 @@ namespace Native.Repositories.Repositories.Contracts
 {
     public interface ICityRepository : IRepository<City>
     {
+        Task<City> CreateCityIfDoesntExist(City city);
+        Task VisitCityByProfileIfNotVisitedBefore(Profile profile, City city);
     }
 }

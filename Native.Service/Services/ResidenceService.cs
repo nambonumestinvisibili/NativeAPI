@@ -36,7 +36,7 @@ namespace Native.Service.Services
             };
 
             var profile = (await _currentUserProvider.GetUserWithProfile()).Profile;
-            var dbCity = await _repositoryManager.City.CreateIfDoesntExist(city);
+            var dbCity = await _repositoryManager.City.CreateCityIfDoesntExist(city);
 
 
             await _repositoryManager.Profile.AddCityToProfile(profile, dbCity, isProfileNativeToTheCity: true);
@@ -51,8 +51,7 @@ namespace Native.Service.Services
 
             using (var httpClient = new HttpClient())
             {
-                // Define the query parameters
-                var queryParameters = new System.Collections.Generic.Dictionary<string, string>
+                var queryParameters = new Dictionary<string, string>
             {
                 { "format", "json" },
                 { "lat", latitude.ToString() },

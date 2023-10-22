@@ -14,7 +14,6 @@ namespace Native.Domain.Models
         [Required]
         public TimeOnly ClosingTime { get; set; }
         public Location Location { get; set; }
-        //public City? City { get; set; }
         public ICollection<Interest> Interests { get; set; } = new List<Interest>();
         public ICollection<ProfileVenue> ProfilesThatVisitedVenue { get; set; } = new List<ProfileVenue>();
     }

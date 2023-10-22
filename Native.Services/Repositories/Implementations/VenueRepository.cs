@@ -34,6 +34,8 @@ namespace Native.Repositories.Repositories.Implementations
                 .Include(ve => ve.ProfilesThatVisitedVenue)
                     .ThenInclude(pr => pr.Profile)
                         .ThenInclude(prof => prof.CitiesThatTheProfileVisited)
+                .Include(ve => ve.Location)
+                    .ThenInclude(ve => ve.City)
                 .GetByGuidAsync(guid);
         }
 

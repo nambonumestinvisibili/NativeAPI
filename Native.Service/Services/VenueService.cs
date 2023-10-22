@@ -52,7 +52,11 @@ namespace Native.Service.Services
 
             var profileGuid = await _currentUserProvider.GetUserProfileGuid();
             var profile = await _repositoryManager.Profile.GetByGuidAsync(profileGuid);
-            var venue = await _repositoryManager.Venue.GetByGuidAsync(venueGuid);
+            var venue = await _repositoryManager.Venue.GetDetailedVenue(venueGuid);
+            var cityVenueIsIn = venue.Location.City;
+
+            await _repositoryManager.City.VisitCityByProfileIfNotVisitedBefore(profile, cityVenueIsIn);
+
             var pv = new ProfileVenue()
             {
                 Profile = profile,

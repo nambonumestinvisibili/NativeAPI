@@ -41,8 +41,6 @@ namespace Native.Domain.DataAccess
             ConfigureProfileEventManyToManyRelationship(modelBuilder);
             ConfigureProfileVenueManyToManyRelationship(modelBuilder);
             ConfigureProfileCityManyToManyRelationship(modelBuilder);
-
-            //modelBuilder.Entity<City>().HasKey(city => new { city.CountryIsoCode, city.PostalCode });
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder builder)
