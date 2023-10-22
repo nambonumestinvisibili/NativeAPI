@@ -5,6 +5,7 @@ using Native.Domain.Models;
 using Native.Repositories.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,11 @@ namespace Native.Repositories.Repositories.Implementations
 
         public async Task VisitCityByProfileIfNotVisitedBefore(Profile profile, City city) 
         {
+            if (!profile.HasProfileRegisteredNativeCity)
+            {
+                throw new ValidationException("Profile needs to have native city registered first");
+            }
+
             var record = await NativeContext.ProfileCity.FirstOrDefaultAsync(pc =>
                 pc.ProfileId == profile.Id && pc.CityId == city.Id);
 

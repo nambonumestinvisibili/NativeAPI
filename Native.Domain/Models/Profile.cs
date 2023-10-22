@@ -21,9 +21,12 @@ namespace Native.Domain.Models
         public bool IsProfileRegistrationCompleted =>
             new object[]
             { FirstName, SecondName, Bio,
-                Introduction, BirthDayDate}.All(data => !(data == null)) 
+                Introduction, BirthDayDate}.All(data => !(data == null))
             && Interests.Count != 0
-            && CitiesThatTheProfileVisited.Any(pc => pc.IsProfileNativeToTheCity); 
+            && HasProfileRegisteredNativeCity;
+
+        public bool HasProfileRegisteredNativeCity =>
+            CitiesThatTheProfileVisited.Any(pc => pc.IsProfileNativeToTheCity);
 
     }
 }
