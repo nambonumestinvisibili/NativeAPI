@@ -11,5 +11,6 @@ namespace Native.Service.Services.Interfaces
     public interface IProfileService : IResourceService<Profile>
     {
         Task<DetailedProfileDTO> GetCurrentUserProfile();
+        Task<DetailedProfileDTO> GetOtherUserProfile(Guid guid);
     }
 }

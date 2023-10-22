@@ -30,5 +30,11 @@ namespace Native.Service.Services
             var profile = await _repositoryManager.Profile.GetDetailedProfile(profileGuid);
             return _mapper.Map<DetailedProfileDTO>(profile);
         }
+
+        public async Task<DetailedProfileDTO> GetOtherUserProfile(Guid profileGuid)
+        {
+            var profile = await _repositoryManager.Profile.GetDetailedProfile(profileGuid);
+            return _mapper.Map<DetailedProfileDTO>(profile);
+        }
     }
 }

@@ -37,6 +37,7 @@ namespace Native.Repositories.Repositories.Implementations
         public async Task<Profile> GetDetailedProfile(Guid profileGuid) => 
             await NativeContext.Profiles
                 .Include(assoc => assoc.Interests)
+                .Include(profile => profile.CitiesThatTheProfileVisited)
             .GetByGuidAsync(profileGuid);
 
         public async Task<Votes> GetVotes(Venue venue)

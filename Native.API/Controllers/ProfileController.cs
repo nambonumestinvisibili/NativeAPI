@@ -22,7 +22,7 @@ namespace Native.API.Controllers
 
         [HttpGet("{guid}")]
         public async Task<IActionResult> GetOtherUserProfile(Guid guid) =>
-            Ok(await _profileService.GetByGuid<ProfileDTO>(guid));
+            Ok(await _profileService.GetOtherUserProfile(guid));
 
         [HttpGet]
         public async Task<IActionResult> GetCurrentUserProfile() =>
