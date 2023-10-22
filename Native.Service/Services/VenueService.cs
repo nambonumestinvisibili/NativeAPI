@@ -36,9 +36,8 @@ namespace Native.Service.Services
         {
             var venue = await _repositoryManager.Venue.GetDetailedVenue(guid);
             var venueDTO = _mapper.Map<VenueDTO>(venue);
-            var votes = new Votes(new VotesBreakdown(0, 0), new VotesBreakdown(0, 0));
 
-            //var profilesWhoUpvoted = await _repositoryManager.Profile
+            var votes = await _repositoryManager.Profile.GetVotes(venue);
 
             return new DetailedVenueDTO(venueDTO, votes);
         }

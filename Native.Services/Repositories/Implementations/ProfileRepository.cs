@@ -39,18 +39,21 @@ namespace Native.Repositories.Repositories.Implementations
                 .Include(assoc => assoc.Interests)
             .GetByGuidAsync(profileGuid);
 
-        public async Task GetVotes(int venueId)
+        public async Task<Votes> GetVotes(Venue venue)
         {
             var profileVenueTableWithSpecificVenueQuery = NativeContext.ProfileVenues
                 .Include(pv => pv.Profile)
                     .ThenInclude(pr => pr.CitiesThatTheProfileVisited)
-                .Where(profileVenue => profileVenue.VenueId == venueId);
+                .Where(profileVenue => profileVenue.VenueId == venue.Id);
 
-            // needs to have cities... if city == null 
+            // PROFILE needs to have NATIVE cities ASSIGNED... if city == null 
 
-            var count = await profileVenueTableWithSpecificVenueQuery
+            var calculation = await profileVenueTableWithSpecificVenueQuery
                 .GroupBy(
-                    profileVenue => profileVenue.Profile.CitiesThatTheProfileVisited.Any(city => city.IsProfileNativeToTheCity),
+                    profileVenue => 
+                        profileVenue.Profile.CitiesThatTheProfileVisited
+                            .Any(profileCity => profileCity.CityId == venue.Location.City.Id
+                                && profileCity.IsProfileNativeToTheCity),
                     (isNative, profileVenues) => new
                     {
                         IsNative = isNative,
@@ -59,8 +62,12 @@ namespace Native.Repositories.Repositories.Implementations
                     }
                 ).ToDictionaryAsync(x => x.IsNative);
 
-            //var nativeVotes = count.Where(x => x.IsNative);
-            //var touristVotes = count.Where(x => !x.IsNative);
+            var nativeVotes = calculation.FirstOrDefault(x => x.Key == true).Value;
+            var touristVotes = calculation.FirstOrDefault(x => x.Key == false).Value;
+
+            return new Votes(
+                new VotesBreakdown(nativeVotes?.ProfileUpvotesCount ?? 0, touristVotes?.ProfileUpvotesCount ?? 0), 
+                new VotesBreakdown(nativeVotes?.ProfileDownVotesCount ?? 0, touristVotes?.ProfileDownVotesCount ?? 0));
         }
     }
 }
