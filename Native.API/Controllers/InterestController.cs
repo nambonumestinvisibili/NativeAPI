@@ -21,7 +21,7 @@ namespace Native.API.Controllers
         }
 
         [HttpGet]
-
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllInterest1() =>
             Ok((await _interestService.GetAllAsync<InterestDTO>())
                 .Select(interest => new

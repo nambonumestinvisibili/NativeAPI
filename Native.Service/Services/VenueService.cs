@@ -13,18 +13,34 @@ namespace Native.Service.Services
     internal class VenueService : ResourceService<Venue>, IVenueService
     {
         private readonly ICurrentUserProvider _currentUserProvider;
-
+        private readonly IResidenceService _residenceService;
+        
         public VenueService(
             IMapper mapper, 
             IRepositoryManager repositoryManager,
+            IResidenceService residenceService,
             ICurrentUserProvider currentUserProvider
             ) : base(repositoryManager, mapper)
         {
             _currentUserProvider = currentUserProvider;
+            _residenceService = residenceService;
         }
 
         public async Task CreateNewVenue(Venue venue, IEnumerable<Guid> interestGuids)
         {
+            var address = await _residenceService.GetAddressBasedOn(venue.Location.Longitude, venue.Location.Latitude);
+            
+            City city = new()
+            {
+                CityName = address.City,
+                CountryIsoCode = address.ISO3166,
+                PostalCode = address.Postcode,
+            };
+
+            await _repositoryManager.City.CreateCityIfDoesntExist(city);
+            await _repositoryManager.Save();
+
+            venue.Location.City = city;
             _repositoryManager.Venue.Create(venue);
             await _repositoryManager.Save();
 
@@ -38,8 +54,10 @@ namespace Native.Service.Services
             var venueDTO = _mapper.Map<VenueDTO>(venue);
 
             var votes = await _repositoryManager.Profile.GetVotes(venue);
+            var hasUserVisitedVenue = await _repositoryManager.Profile.CheckIfProfileVisitedVenue(
+                await _currentUserProvider.GetUserProfileGuid(), guid);
 
-            return new DetailedVenueDTO(venueDTO, votes);
+            return new DetailedVenueDTO(venueDTO, votes, hasUserVisitedVenue);
         }
 
         public async Task AddProfileToVenueVisitors(Guid venueGuid, bool hasProfileUpvotes, bool hasProfileDownVoted)

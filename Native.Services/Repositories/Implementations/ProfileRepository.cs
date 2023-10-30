@@ -34,6 +34,14 @@ namespace Native.Repositories.Repositories.Implementations
             await NativeContext.SaveChangesAsync();
         }
 
+        public async Task<bool> CheckIfProfileVisitedVenue(Guid profileGuid, Guid venueGuid)
+        {
+            return await NativeContext.ProfileVenues
+                    .Include(pv => pv.Profile)
+                    .Include(pv => pv.Venue)
+                .AnyAsync(pv => pv.Profile.Guid == profileGuid && pv.Venue.Guid == venueGuid);
+        }
+
         public async Task<Profile> GetDetailedProfile(Guid profileGuid) => 
             await NativeContext.Profiles
                 .Include(assoc => assoc.Interests)

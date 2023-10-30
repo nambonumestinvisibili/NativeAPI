@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace Native.Service.DTOs
 {
-    public record DetailedVenueDTO(VenueDTO Venue, Votes Votes);
+    public record DetailedVenueDTO(VenueDTO Venue, Votes Votes, bool HasProfileVisited);
 }

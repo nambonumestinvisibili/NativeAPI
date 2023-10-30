@@ -12,5 +12,6 @@ namespace Native.Service.Services.Interfaces
     public interface IResidenceService : IResourceService<Location>
     {
         Task<CityDTO> AssignNativeAddressToPersonBasedOn(double longitude, double latitude, bool isLocationNative);
+        Task<Address> GetAddressBasedOn(double longitude, double latitude);
     }
 }
