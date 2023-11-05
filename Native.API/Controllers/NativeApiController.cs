@@ -14,7 +14,7 @@ namespace Native.API.Controllers
     [Authorize]
     [ApiController]
     [Route("/api/[controller]")]
-    public class NativeApiController  : ControllerBase
+    public abstract class NativeApiController  : ControllerBase
     {
         protected readonly IMapper _mapper;
 

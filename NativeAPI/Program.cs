@@ -54,6 +54,8 @@ builder.Services.ConfigureDbContext(builder.Configuration.GetConnectionString("N
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureNativeServices();
 builder.Services.ConfigureControllers();
+
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(options =>
 {
@@ -78,6 +80,8 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 builder.Services.ConfigureIdentity();
 
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -85,6 +89,7 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
+
 
 builder.Services.AddAutoMapper(
     typeof(Native.Domain.Extensions),

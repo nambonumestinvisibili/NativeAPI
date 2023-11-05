@@ -12,6 +12,5 @@ namespace Native.Service.DTOs
     {
         public Guid Guid { get; set; }
         public string Name { get; set; }
-        //public ICollection<VenueDTO> Venues { get; set; }
     }
 }

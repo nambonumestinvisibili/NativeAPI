@@ -61,7 +61,12 @@ namespace Native.Domain.DataAccess
 
             var interests = csvReader.GetRecords<InterestSeed>()
                 .ToImmutableList()
-                .Select((seedInterest) => new Interest() { Id = seedInterest.Id, Guid = seedInterest.Guid, Name = seedInterest.Name });
+                .Select((seedInterest) => new Interest() 
+                { 
+                    Id = seedInterest.Id, 
+                    Guid = seedInterest.Guid, 
+                    Name = seedInterest.Name 
+                });
 
             modelBuilder.Entity<Interest>().HasData(interests);
         }

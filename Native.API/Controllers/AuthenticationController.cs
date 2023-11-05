@@ -22,22 +22,13 @@ namespace Native.API.Controllers
     public class AuthenticationController : NativeApiController
     {
         private readonly IUserService _userService;
-        private readonly IFakeUserService _fakeUserService;
-        private readonly IWebHostEnvironment _environment;
-        private readonly ILogger _logger;
 
         public AuthenticationController(
             IMapper mapper,
-            IUserService userService,
-            IFakeUserService fakeUserService,
-            IWebHostEnvironment webHostEnvironment,
-            ILogger<AuthenticationController> logger)
+            IUserService userService)
             : base(mapper)
         {
-            _logger = logger;
             _userService = userService;
-            _fakeUserService = fakeUserService;
-            _environment = webHostEnvironment;
         }
 
         [AllowAnonymous]
